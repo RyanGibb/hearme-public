@@ -61,7 +61,7 @@ app.use(express.static(__dirname + '/static_files'));
 //                             Nexmo
 //----------------------------------------------------------------------------
 
-const url = 'http://cc469f2b.ngrok.io';
+const url = 'http://www.example.com';
 
 const Nexmo = require('nexmo');
 
