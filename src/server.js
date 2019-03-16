@@ -61,7 +61,7 @@ app.use(express.static(__dirname + '/frontend/my-app/dist/my-app/'));
 //                             Nexmo
 //----------------------------------------------------------------------------
 
-const url = 'http://www.example.com';
+const url = 'https://sound-machine-234713.appspot.com/';
 
 const Nexmo = require('nexmo');
 
