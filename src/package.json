@@ -1,7 +1,7 @@
 {
   "name": "hacktheburgh5",
   "version": "1.0.0",
-  "main": "src/server.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/server.js"
@@ -24,9 +24,5 @@
     "nexmo": "^2.4.1"
   },
   "devDependencies": {},
-  "description": "",
-  "engines": {
-  "node": "10.0.0",
-  "npm": "6.0.0"
-},
+  "description": ""
 }
