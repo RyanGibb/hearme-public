@@ -35,8 +35,7 @@ const ws = require('ws');
 const wsServer = new ws.Server({server: httpServer});
 
 wsServer.on('connection', function(ws, req) {
-  console.log('WS connection ' + req.connection.remoteAddress + ':'
-      + req.connection.remotePort);
+  wsMsgLog('WS connection ', req, '');
 
   ws.on('close', function(code, msg) {
     console.log('WS disconnection ' + ws._socket.remoteAddress + ':'
