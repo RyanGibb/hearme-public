@@ -118,7 +118,7 @@ function call(to_number, callback) {
 }
 
 function speak(uuid, text, callback) {
-  nexmo.calls.talk.start(uuid, { text: text, voiceName: DEFAULT_VOICE },
+  nexmo.calls.talk.start(uuid, { text: text, voice_name: DEFAULT_VOICE },
     (err, res) => {
       if(err) { console.error(err); }
       else {
