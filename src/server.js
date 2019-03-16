@@ -46,7 +46,7 @@ async function speechToText() {
 const express = require('express');
 const http = require('http');
 
-let port = 5000;
+let port = 8080;
 const app = express();
 const httpServer = http.createServer(app);
 
@@ -55,7 +55,7 @@ httpServer.listen(port, function () {
 });
 
 // Serve static files, such as css and scripts, from the directory below.
-app.use(express.static(__dirname + '/static_files'));
+app.use(express.static(__dirname + '/frontend/my-app/dist/my-app/'));
 
 //----------------------------------------------------------------------------
 //                             Nexmo
