@@ -1,6 +1,5 @@
 
 const bodyParser = require('body-parser');
-const nexmo = require('nexmo');
 
 //TODO add this to websocket lol
 //bodyParser.urlencoded({ extended: true})
@@ -65,9 +64,38 @@ httpServer.listen(port, function () {
 // Serve static files, such as css and scripts, from the directory below.
 app.use(express.static(__dirname + '/static_files'));
 
+//----------------------------------------------------------------------------
+//                             Nexmo
+//----------------------------------------------------------------------------
+
+//Instantiate library
+const nexmo = require('nexmo');
+
+const nexmo = new Nexmo({
+  apiKey: '***REMOVED***',
+  apiSecret: '***REMOVED***',
+  applicationId: '***REMOVED***',
+  privateKey:'./private.key',
+});
+
+// Make a phone call
+nexmo.calls.create({
+  to: [{type: 'phone', number: '447483833014'}],
+  from: [{type: 'phone', number: '447418343240'}],
+  answer_url: ['https://dummy.com/ncco/dummy.json'],
+})
+
+
+
 app.get('/nexmo_event', function (req, res) {
   console.log("Nexmo event: " + req);
 }
+
+
+app.get('/nexmo_action', function (req, res) {
+  res.send("something");
+}
+
 //----------------------------------------------------------------------------
 //                              WebSocket Server
 //----------------------------------------------------------------------------
