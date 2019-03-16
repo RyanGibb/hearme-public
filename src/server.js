@@ -66,7 +66,7 @@ const url = 'https://sound-machine-234713.appspot.com/';
 const Nexmo = require('nexmo');
 
 const seamus = '447955753134';
-const ryan = '447551580894';
+const ryan = '447751580894';
 const george = '447543507436';
 
 const FROM_NUMBER = '447418343240';
@@ -130,6 +130,27 @@ function speak(uuid, text, callback) {
 function hangup(uuid, callback) {
   nexmo.calls.update(callId, { action: 'hangup' }, callback);
 }
+
+
+// call(ryan, "the quick brown fox jumped over the lazy dog", function(error, uuid) {
+//   if(error) {
+//     console.log("TEST ERROR CALL " + JSON.stringify(error));
+//   }
+//   else {
+//     setTimeout(function() {
+//       speak(uuid, "white apple",
+//         function(error, res) {
+//           if(error) {
+//             console.log("TEST ERROR SPEAK " + JSON.stringify(error));
+//           }
+//           else {
+//             console.log("TEST SPEAK RESPONSE " + JSON.stringify(res));
+//           }
+//         }
+//       )
+//     }, 8000);
+//   }
+// })
 
 //----------------------------------------------------------------------------
 //                              WebSocket Server
