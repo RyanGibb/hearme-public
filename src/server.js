@@ -66,7 +66,7 @@ app.use(express.static(__dirname + '/static_files'));
 
 app.get('/nexmo_event', function (req, res) {
   console.log("Nexmo event: " + req);
-}
+};
 //----------------------------------------------------------------------------
 //                              WebSocket Server
 //----------------------------------------------------------------------------
