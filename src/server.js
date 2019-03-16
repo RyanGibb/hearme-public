@@ -82,16 +82,7 @@ nexmo.calls.create({
   answer_url: [answer_url],
 })
 
-const jwt = nexmo.generateJwt();
-
-// Login
-new ConversationClient().login(jwt).then(application => {
-  console.log(application);
-})
-
-// Mke a call to a phone number
-application.callPhone(to_number);
-
+//const jwt = nexmo.generateJwt();
 
 app.get('/nexmo_event', function (req, res) {
   console.log("Nexmo event: " + req);
