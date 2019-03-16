@@ -12,3 +12,9 @@ call this
 whenever person on other end speaks its interpreted as text
 
 whenever you speak a robot ‘speaks’ this
+
+## To run
+
+npm install
+
+node src/server.js
