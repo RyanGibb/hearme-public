@@ -64,9 +64,9 @@ httpServer.listen(port, function () {
 // Serve static files, such as css and scripts, from the directory below.
 app.use(express.static(__dirname + '/static_files'));
 
-app.get('/nexmo_event', function (req, res) {
+app.get('/nexmo_event', function (req, res)) {
   console.log("Nexmo event: " + req);
-};
+}
 //----------------------------------------------------------------------------
 //                              WebSocket Server
 //----------------------------------------------------------------------------
