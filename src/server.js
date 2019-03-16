@@ -13,15 +13,16 @@ const bodyParser = require('body-parser');
 
 const express = require('express');
 const http = require('http');
+
+let port = 5000;
+const app = express();
 const httpServer = http.createServer(app);
 
 httpServer.listen(port, function () {
   console.log('Listening for HTTP requests on port: ' + port);
 });
 
-let app = express();
-
-var server = app.listen(5000, () => {
+var server = app.listen(port, () => {
     console.log('Server is running..');
 });
 

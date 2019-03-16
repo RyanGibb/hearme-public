@@ -1,7 +1,6 @@
 {
   "name": "hacktheburgh5",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -16,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/Shamebob/HackTheBurgh5/issues"
   },
-  "homepage": "https://github.com/Shamebob/HackTheBurgh5#readme"
+  "homepage": "https://github.com/Shamebob/HackTheBurgh5#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "ws": "^6.2.0"
+  },
+  "devDependencies": {},
+  "description": ""
 }
