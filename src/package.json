@@ -20,7 +20,8 @@
     "@google-cloud/speech": "^2.3.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
-    "ws": "^6.2.0"
+    "ws": "^6.2.0",
+    "nexmo": "^2.4.1"
   },
   "devDependencies": {},
   "description": ""

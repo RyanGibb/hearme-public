@@ -1,5 +1,6 @@
 
 const bodyParser = require('body-parser');
+const nexmo = require('nexmo');
 
 //TODO add this to websocket lol
 //bodyParser.urlencoded({ extended: true})
@@ -70,25 +71,19 @@ app.use(express.static(__dirname + '/static_files'));
 
 const ws = require('ws');
 
-const maxLogMessageLength = 200;
-
 const wsServer = new ws.Server({server: httpServer});
 
 wsServer.on('connection', function(ws, req) {
-  console.log('WS connection ' + req.connection.remoteAddress + ':'
-      + req.connection.remotePort);
+  wsMsgLog('WS connection ', req, '');
 
-  ws.on('close', function(code, message) {
+  ws.on('close', function(code, msg) {
     console.log('WS disconnection ' + ws._socket.remoteAddress + ':'
         + req.connection.remotePort + ' Code ' + code);
   });
 
   ws.on('message', function(data) {
-    let messageString = data.toString();
-    console.log('WS -> rx ' + req.connection.remoteAddress + ':' + req.connection.remotePort + ' ' +
-        (messageString.length > maxLogMessageLength ? messageString.slice(0, maxLogMessageLength) + "..." : messageString)
-    );
-
+    let msgString = data.toString();
+    wsMsgLog('WS -> rx ', req, msgString);
     try {
       var receivedMessage = JSON.parse(messageString);
     }
@@ -102,10 +97,22 @@ wsServer.on('connection', function(ws, req) {
   })
 });
 
-function respond(ws, req, responseMessage) {
-  var messageString = JSON.stringify(responseMessage);
-  ws.send(messageString);
-  console.log('WS <- tx ' + req.connection.remoteAddress + ':' + req.connection.remotePort + ' ' +
-    (messageString.length > maxLogMessageLength ? messageString.slice(0, maxLogMessageLength) + "..." : messageString)
-  );
+function respondError(ws, req, human_readable_error, error) {
+  let responce = 'error';
+  responceMessage = {responce, human_readable_error, error};
+  respond(ws, req, responceMessage);
+}
+
+function respond(ws, req, msg) {
+  var msgString = JSON.stringify(msg);
+  ws.send(msgString);
+  wsLog('WS <- tx ', req, msgString);
 };
+
+const lenLog = 200;
+
+function wsMsgLog(prefix, req, msg) {
+  console.log(prefix + req.connection.remoteAddress + ':' + req.connection.remotePort + ' ' +
+    (msg.length > lenLog ? msg.slice(0, lenLog) + "..." : msg)
+  );
+}
