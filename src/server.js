@@ -84,7 +84,7 @@ const nexmo = new Nexmo({
   applicationId: '***REMOVED***',
   privateKey:'private.key',
 }, {
-  debug: true
+  //debug: true
 });
 
 app.get(EVENT_PATH, function (req, res) {
@@ -92,41 +92,39 @@ app.get(EVENT_PATH, function (req, res) {
 });
 
 // Make a phone call, returns the call uuid
-function call(to_number, callback) {
+function call(to_number, message, callback) {
   nexmo.calls.create({
-    to: [{type: 'phone', number: to_number}],
-    from: {type: 'phone', number: FROM_NUMBER},
-    //answer_url: [url + ANSWER_PATH],
-    ncco: [
-      {
-        'action':'talk',
-        'name': 'hearme',
-        'text': START_TEXT
+      to: [{type: 'phone', number: to_number}],
+      from: {type: 'phone', number: FROM_NUMBER},
+      //answer_url: [url + ANSWER_PATH],
+      ncco: [
+        {
+          'action':'talk',
+          'text': message
+        },
+        {
+          "action": "input",
+          "timeOut": 10,
+          "eventUrl": [url + EVENT_PATH]
+        }
+      ],
+      event_url: [url + EVENT_PATH]
+    },
+    function (err, res) {
+      if(err) {
+        console.error(err);
+        callback(err)
       }
-    ],
-    event_url: [url + EVENT_PATH]
-  }, function (err, res) {
-    if(err) {
-      console.error(err);
-      callback(err)
-    }
-    else {
-      console.log(res);
-      callback(null, res.uuid);
-    }
-  });
-}
-
-function speak(uuid, text, callback) {
-  nexmo.calls.talk.start(uuid, { text: text, voice_name: DEFAULT_VOICE },
-    (err, res) => {
-      if(err) { console.error(err); }
       else {
-          console.log(res);
+        console.log(res);
+        callback(null, res.uuid);
       }
     }
   );
-  callback(null);
+}
+
+function speak(uuid, text, callback) {
+  nexmo.calls.talk.start(uuid, { text: text, voice_name: DEFAULT_VOICE }, callback);
 }
 
 function hangup(uuid, callback) {
@@ -161,7 +159,10 @@ wsServer.on('connection', function(ws, req) {
     }
 
     if (msg.request == 'call') {
-      call(msg.number, function(error, uuid) {
+      if (!msg.message) {
+        msg.message = START_MESSAGE;
+      }
+      call(msg.number, msg.message, function(error, uuid) {
         if (error) {
           respondError(ws, req, "error calling number", error);
         } else {
@@ -179,7 +180,7 @@ wsServer.on('connection', function(ws, req) {
       });
     }
     else {
-      respondError(ws, req, 'unsupported request ' + msg.request + '\'');
+      respondError(ws, req, 'unsupported request ' + receivedMessage.request + '\'');
     }
 
   })
@@ -194,7 +195,7 @@ function respondError(ws, req, human_readable_error, error) {
 function respond(ws, req, msg) {
   var msgString = JSON.stringify(msg);
   ws.send(msgString);
-  wsMsgLog('WS <- tx ', req, msgString);
+  wsLog('WS <- tx ', req, msgString);
 };
 
 const lenLog = 200;
@@ -203,5 +204,4 @@ function wsMsgLog(prefix, req, msg) {
   console.log(prefix + req.connection.remoteAddress + ':' + req.connection.remotePort + ' ' +
     (msg.length > lenLog ? msg.slice(0, lenLog) + '...' : msg)
   );
-  // console.log(JSON.parse(msg));
 }
