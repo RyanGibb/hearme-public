@@ -138,12 +138,6 @@ function hangup(uuid, callback) {
   nexmo.calls.update(callId, { action: 'hangup' }, callback);
 }
 
-call(george, function(error, uuid) {
-  // setTimeout(function(){
-  //   speak(uuid, "FUck u george", function(){});
-  // },10000 )
-});
-
 //----------------------------------------------------------------------------
 //                              WebSocket Server
 //----------------------------------------------------------------------------
