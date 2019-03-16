@@ -149,7 +149,7 @@ wsServer.on('connection', function(ws, req) {
         + req.connection.remotePort + ' Code ' + code);
   });
 
-  ws.on('message', function(text) {
+  ws.on('message', function(data) {
     let msgString = data.toString();
     wsMsgLog('WS -> rx ', req, msgString);
     try {
@@ -179,7 +179,7 @@ wsServer.on('connection', function(ws, req) {
       });
     }
     else {
-      respondError(ws, req, 'unsupported request ' + receivedMessage.request + '\'');
+      respondError(ws, req, 'unsupported request ' + msg.request + '\'');
     }
 
   })
@@ -194,7 +194,7 @@ function respondError(ws, req, human_readable_error, error) {
 function respond(ws, req, msg) {
   var msgString = JSON.stringify(msg);
   ws.send(msgString);
-  wsLog('WS <- tx ', req, msgString);
+  wsMsgLog('WS <- tx ', req, msgString);
 };
 
 const lenLog = 200;
@@ -203,4 +203,5 @@ function wsMsgLog(prefix, req, msg) {
   console.log(prefix + req.connection.remoteAddress + ':' + req.connection.remotePort + ' ' +
     (msg.length > lenLog ? msg.slice(0, lenLog) + '...' : msg)
   );
+  // console.log(JSON.parse(msg));
 }

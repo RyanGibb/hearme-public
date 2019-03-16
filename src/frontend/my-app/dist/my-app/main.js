@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "h1 {\n    color: #369;\n    font-family: Arial, Helvetica, sans-serif;\n    font-size: 250%;\n  }\n\n#io-forms .div {\n  display: inline-block \n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYXBwLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxXQUFXO0lBQ1gseUNBQXlDO0lBQ3pDLGVBQWU7RUFDakI7O0FBRUY7RUFDRTtBQUNGIiwiZmlsZSI6InNyYy9hcHAvYXBwLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJoMSB7XG4gICAgY29sb3I6ICMzNjk7XG4gICAgZm9udC1mYW1pbHk6IEFyaWFsLCBIZWx2ZXRpY2EsIHNhbnMtc2VyaWY7XG4gICAgZm9udC1zaXplOiAyNTAlO1xuICB9XG5cbiNpby1mb3JtcyAuZGl2IHtcbiAgZGlzcGxheTogaW5saW5lLWJsb2NrIFxufSJdfQ== */"
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2FwcC5jb21wb25lbnQuY3NzIn0= */"
 
 /***/ }),
 
@@ -41,7 +41,7 @@ module.exports = "h1 {\n    color: #369;\n    font-family: Arial, Helvetica, san
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div style=\"text-align:center\">\n    <img width=\"300\" alt=\"Angular Logo\" src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==\">\n  <h1>\n    Welcome to {{ title }}!\n  </h1>\n</div>\n\n\n"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div style=\"text-align:center\">\n    <img width=\"300\" alt=\"Angular Logo\" src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==\">\n  <h1>\n    Welcome to {{ title }}!\n  </h1>\n</div>\n<div id=\"io-forms\" class=\"row\">\n    <div class = \"col-md-5 offset-md-1\">\n      <app-input-form></app-input-form>\n    </div>\n    <div class = \"col-md-5 offset-md-1\">\n      <app-output-form></app-output-form>\n    </div>\n</div>\n\n\n"
 
 /***/ }),
 
@@ -49,19 +49,20 @@ module.exports = "<!--The content below is only a placeholder and can be replace
 /*!**********************************!*\
   !*** ./src/app/app.component.ts ***!
   \**********************************/
-/*! exports provided: AppComponent, InputForm, OutputForm, ClickMeComponent */
+/*! exports provided: AppComponent, OutputForm, ClickMeComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "InputForm", function() { return InputForm; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OutputForm", function() { return OutputForm; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ClickMeComponent", function() { return ClickMeComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 
 
+var wsUrl = "ws://" + location.hostname + ":" + location.port;
+var ws = new WebSocket(wsUrl);
 var AppComponent = /** @class */ (function () {
     function AppComponent() {
         this.title = 'Hear Me';
@@ -76,18 +77,23 @@ var AppComponent = /** @class */ (function () {
     return AppComponent;
 }());
 
-var InputForm = /** @class */ (function () {
-    function InputForm() {
-    }
-    InputForm = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-            selector: 'app-input-form',
-            template: "\n    <form>\n    Enter what you'd like to say in the phone call.<br>\n    <input type=\"text\" name=\"UserInput\"><br>"
-        })
-    ], InputForm);
-    return InputForm;
-}());
-
+// @Component({
+//   selector: 'app-input-form',
+//   template: `
+//     <form onsubmit = sendMessage(Submit)>
+//     Enter what you'd like to say in the phone call.<br>
+//     <input type="text" name="UserInput"><br>
+//     <input type="submit" value="Submit">
+//     </form>`
+// })
+// export class InputForm {
+//   sendMessage(message) {
+//     let messageString = JSON.stringify(message);
+//     console.log("Message string: " + messageString)
+//     console.log("-> tx " + message);
+//     ws.send(JSON.stringify(message));
+//   }
+// }
 var OutputForm = /** @class */ (function () {
     function OutputForm() {
     }
@@ -116,6 +122,9 @@ var ClickMeComponent = /** @class */ (function () {
     return ClickMeComponent;
 }());
 
+ws.onopen = function () {
+    // Do nothing
+};
 
 
 /***/ }),
@@ -133,7 +142,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _input_form_input_form_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./input-form/input-form.component */ "./src/app/input-form/input-form.component.ts");
+
+
 
 
 
@@ -144,18 +157,113 @@ var AppModule = /** @class */ (function () {
     AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
             declarations: [
-                _app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"],
-                _app_component__WEBPACK_IMPORTED_MODULE_3__["InputForm"],
-                _app_component__WEBPACK_IMPORTED_MODULE_3__["OutputForm"]
+                _app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"],
+                _app_component__WEBPACK_IMPORTED_MODULE_4__["OutputForm"],
+                _input_form_input_form_component__WEBPACK_IMPORTED_MODULE_5__["InputFormComponent"]
             ],
             imports: [
-                _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"]
+                _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"]
             ],
             providers: [],
-            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"], _app_component__WEBPACK_IMPORTED_MODULE_3__["InputForm"], _app_component__WEBPACK_IMPORTED_MODULE_3__["OutputForm"]]
+            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"], _app_component__WEBPACK_IMPORTED_MODULE_4__["OutputForm"], _input_form_input_form_component__WEBPACK_IMPORTED_MODULE_5__["InputFormComponent"]]
         })
     ], AppModule);
     return AppModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/connection_data.ts":
+/*!************************************!*\
+  !*** ./src/app/connection_data.ts ***!
+  \************************************/
+/*! exports provided: ConnectionData */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ConnectionData", function() { return ConnectionData; });
+var ConnectionData = /** @class */ (function () {
+    function ConnectionData(request, number, message) {
+        this.request = request;
+        this.number = number;
+        this.message = message;
+    }
+    return ConnectionData;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/input-form/input-form.component.css":
+/*!*****************************************************!*\
+  !*** ./src/app/input-form/input-form.component.css ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2lucHV0LWZvcm0vaW5wdXQtZm9ybS5jb21wb25lbnQuY3NzIn0= */"
+
+/***/ }),
+
+/***/ "./src/app/input-form/input-form.component.html":
+/*!******************************************************!*\
+  !*** ./src/app/input-form/input-form.component.html ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "{{diagnostic}}\n<form (ngSubmit)=\"onSubmit(model)\" #inputForm=\"ngForm\">\n  <div class=\"form-group\">\n    <label for=\"number\">Phone Number</label>\n    <input type=\"text\" class=\"form-control\" id=\"number\"\n          required\n          [(ngModel)]=\"model.number\" name=\"number\">\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"message\">Message</label>\n    <input type=\"text\"  class=\"form-control\" id=\"message\"\n          [(ngModel)]=\"model.message\" name=\"message\">\n  </div>\n  <button type=\"submit\" class=\"btn btn-success\" [disabled]=\"!inputForm.form.valid\">Submit</button>\n</form>"
+
+/***/ }),
+
+/***/ "./src/app/input-form/input-form.component.ts":
+/*!****************************************************!*\
+  !*** ./src/app/input-form/input-form.component.ts ***!
+  \****************************************************/
+/*! exports provided: InputFormComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "InputFormComponent", function() { return InputFormComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _connection_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../connection_data */ "./src/app/connection_data.ts");
+
+
+
+var wsUrl = "ws://" + location.hostname + ":" + location.port;
+var ws = new WebSocket(wsUrl);
+var InputFormComponent = /** @class */ (function () {
+    function InputFormComponent() {
+        this.model = new _connection_data__WEBPACK_IMPORTED_MODULE_2__["ConnectionData"]('call', '', '');
+        this.submitted = false;
+    }
+    InputFormComponent.prototype.onSubmit = function (messageString) {
+        this.submitted = true;
+        console.log("-> tx " + JSON.stringify(messageString));
+        ws.send(JSON.stringify(messageString));
+    };
+    Object.defineProperty(InputFormComponent.prototype, "diagnostic", {
+        get: function () { return JSON.stringify(this.model); },
+        enumerable: true,
+        configurable: true
+    });
+    InputFormComponent.prototype.ngOnInit = function () {
+    };
+    InputFormComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-input-form',
+            template: __webpack_require__(/*! ./input-form.component.html */ "./src/app/input-form/input-form.component.html"),
+            styles: [__webpack_require__(/*! ./input-form.component.css */ "./src/app/input-form/input-form.component.css")]
+        })
+    ], InputFormComponent);
+    return InputFormComponent;
 }());
 
 

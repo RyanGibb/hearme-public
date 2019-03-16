@@ -11,14 +11,14 @@ let ws = new WebSocket(wsUrl);
 })
 export class InputFormComponent implements OnInit {
 
-  model = new ConnectionData('', '');
+  model = new ConnectionData('call', '', '');
   submitted = false;
 
 
   onSubmit(messageString) {
     this.submitted = true;
     console.log("-> tx " + JSON.stringify(messageString));
-    ws.send(messageString);
+    ws.send(JSON.stringify(messageString));
   }
 
   get diagnostic() { return JSON.stringify(this.model); }

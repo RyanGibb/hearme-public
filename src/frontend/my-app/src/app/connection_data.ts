@@ -1,6 +1,7 @@
 export class ConnectionData {
     constructor (
-        public phone_number : string,
+        public request : string,
+        public number : string,
         public message: string
     ) { }
 }
