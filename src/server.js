@@ -1,10 +1,4 @@
 
-const bodyParser = require('body-parser');
-
-//TODO add this to websocket lol
-//bodyParser.urlencoded({ extended: true})
-//bodyParser.json()
-
 //----------------------------------------------------------------------------
 //                             Google speech to text stuff
 //----------------------------------------------------------------------------
