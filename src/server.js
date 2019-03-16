@@ -161,24 +161,34 @@ wsServer.on('connection', function(ws, req) {
     }
 
     if (msg.request == 'call') {
-
+      call(msg.number, function(error, uuid) {
+        if (error) {
+          respondError(ws, req, "error calling number", error);
+        } else {
+          let response = "call";
+          let message = { response, uuid };
+          respond(ws, req, message);
+        }
+      })
     }
     else if (msg.request == 'message') {
-      speak(msg.uuid, msg.text);
+      speak(msg.uuid, msg.text, function(error) {
+        if(error) {
+          respondError(ws, req, "error sending message \"" + msg.txt + "\"", error);
+        }
+      });
     }
     else {
       respondError(ws, req, 'unsupported request ' + receivedMessage.request + '\'');
     }
 
-
-
   })
 });
 
 function respondError(ws, req, human_readable_error, error) {
-  let responce = 'error';
-  responceMessage = {responce, human_readable_error, error};
-  respond(ws, req, responceMessage);
+  let response = 'error';
+  responseMessage = {response, human_readable_error, error};
+  respond(ws, req, responseMessage);
 }
 
 function respond(ws, req, msg) {
