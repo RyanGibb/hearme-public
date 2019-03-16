@@ -200,7 +200,7 @@ function respond(ws, req, msg) {
 
 const lenLog = 200;
 
-function wsMsgLog(prefix, req, msg) {
+function wsLog(prefix, req, msg) {
   console.log(prefix + req.connection.remoteAddress + ':' + req.connection.remotePort + ' ' +
     (msg.length > lenLog ? msg.slice(0, lenLog) + '...' : msg)
   );
