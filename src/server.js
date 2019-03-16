@@ -32,7 +32,7 @@ async function speechToText() {
   const config = {
     encoding: 'LINEAR16',
     sampleRateHertz: 16000,
-    languageCode: 'en-US',
+    languageCode: 'en-UK',
   };
   const request = {
     audio: audio,
@@ -46,7 +46,6 @@ async function speechToText() {
     .join('\n');
   console.log(`Transcription: ${transcription}`);
 }
-
 //----------------------------------------------------------------------------
 //                              HTTP Server
 //----------------------------------------------------------------------------
