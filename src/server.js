@@ -61,37 +61,88 @@ app.use(express.static(__dirname + '/static_files'));
 //                             Nexmo
 //----------------------------------------------------------------------------
 
-//Instantiate library
-const nexmo = require('nexmo');
+const url = 'http://cc469f2b.ngrok.io';
 
-var to_number = '447483833014';
-var from_number = '447418343240';
-var answer_url = '';
+const Nexmo = require('nexmo');
+
+const seamus = '447955753134';
+const ryan = '447551580894';
+const george = '447543507436';
+
+const FROM_NUMBER = '447418343240';
+const ANSWER_PATH = '/nexmo_answer';
+const EVENT_PATH = '/nexmo_event';
+const DEFAULT_VOICE = 'Kimberly';
+
+const START_TEXT = 'This is an system for the hearing impaired to be able to '
+                    + 'communicate over the phone through a web interface. '
+                    + 'Visit ' + url
 
 const nexmo = new Nexmo({
   apiKey: '***REMOVED***',
   apiSecret: '***REMOVED***',
   applicationId: '***REMOVED***',
-  privateKey:'./private.key',
+  privateKey:'private.key',
+}, {
+  debug: true
 });
 
-// Make a phone call
-nexmo.calls.create({
-  to: [{type: 'phone', number: from_number}],
-  from: [{type: 'phone', number: to_number}],
-  answer_url: [answer_url],
-})
+app.get(EVENT_PATH, function (req, res) {
+  console.log('Nexmo event: ' + req);
+});
 
-//const jwt = nexmo.generateJwt();
+app.get(ANSWER_PATH, function (req, res) {
+  res.setHeader('Content-Type', 'application/json');
+  let ncco = [
+    {
+      'action':'talk',
+      'name': 'hearme',
+      'text': START_TEXT
+    }
+  ];
+  res.end(JSON.stringify(ncco));
+});
 
-app.get('/nexmo_event', function (req, res) {
-  console.log("Nexmo event: " + req);
+// Make a phone call, returns the call uuid
+function call(to_number, callback) {
+  nexmo.calls.create({
+    to: [{type: 'phone', number: to_number}],
+    from: {type: 'phone', number: FROM_NUMBER},
+    answer_url: [url + ANSWER_PATH],
+    event_url: [url + EVENT_PATH]
+  }, function (err, res) {
+    if(err) {
+      console.error(err);
+      callback(err)
+    }
+    else {
+      console.log(res);
+      callback(null, res.uuid);
+    }
+  });
 }
 
-app.get('/nexmo_action', function (req, res) {
-  res.send("something");
+function speak(uuid, text, callback) {
+  nexmo.calls.talk.start(uuid, { text: text, voiceName: DEFAULT_VOICE },
+    (err, res) => {
+      if(err) { console.error(err); }
+      else {
+          console.log(res);
+      }
+    }
+  );
+  callback(null);
 }
 
+function hangup(uuid, callback) {
+  nexmo.calls.update(callId, { action: 'hangup' }, callback);
+}
+
+call(george, function(error, uuid) {
+  // setTimeout(function(){
+  //   speak(uuid, "FUck u george", function(){});
+  // },10000 )
+});
 
 //----------------------------------------------------------------------------
 //                              WebSocket Server
@@ -109,18 +160,28 @@ wsServer.on('connection', function(ws, req) {
         + req.connection.remotePort + ' Code ' + code);
   });
 
-  ws.on('message', function(data) {
+  ws.on('message', function(text) {
     let msgString = data.toString();
     wsMsgLog('WS -> rx ', req, msgString);
     try {
-      var receivedMessage = JSON.parse(messageString);
+      var msg = JSON.parse(msgString);
     }
     catch(error) {
       respondError(ws, req, 'error parsing JSON request', error);
       return;
     }
 
-    // TODO process message
+    if (msg.request == 'call') {
+
+    }
+    else if (msg.request == 'message') {
+      speak(msg.uuid, msg.text);
+    }
+    else {
+      respondError(ws, req, 'unsupported request ' + receivedMessage.request + '\'');
+    }
+
+
 
   })
 });
@@ -141,6 +202,6 @@ const lenLog = 200;
 
 function wsMsgLog(prefix, req, msg) {
   console.log(prefix + req.connection.remoteAddress + ':' + req.connection.remotePort + ' ' +
-    (msg.length > lenLog ? msg.slice(0, lenLog) + "..." : msg)
+    (msg.length > lenLog ? msg.slice(0, lenLog) + '...' : msg)
   );
 }
