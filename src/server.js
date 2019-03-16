@@ -76,7 +76,7 @@ const DEFAULT_VOICE = 'Kimberly';
 
 const START_TEXT = 'This is an system for the hearing impaired to be able to '
                     + 'communicate over the phone through a web interface. '
-                    + 'Visit ' + url
+                    + 'Visit ' + url;
 
 const nexmo = new Nexmo({
   apiKey: '***REMOVED***',
