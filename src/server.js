@@ -53,7 +53,7 @@ async function speechToText() {
 const express = require('express');
 const http = require('http');
 
-let port = 5000;
+let port = 8080;
 const app = express();
 const httpServer = http.createServer(app);
 
