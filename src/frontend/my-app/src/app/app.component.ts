@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+let wsUrl = "ws://" + location.hostname + ":" + location.port;
+let ws = new WebSocket(wsUrl);
 
 @Component({
   selector: 'app-root',
@@ -9,15 +11,23 @@ export class AppComponent {
   title = 'Hear Me';
 }
 
-@Component({
-  selector: 'app-input-form',
-  template: `
-    <form>
-    Enter what you'd like to say in the phone call.<br>
-    <input type="text" name="UserInput"><br>`
-})
-export class InputForm {
-}
+// @Component({
+//   selector: 'app-input-form',
+//   template: `
+//     <form onsubmit = sendMessage(Submit)>
+//     Enter what you'd like to say in the phone call.<br>
+//     <input type="text" name="UserInput"><br>
+//     <input type="submit" value="Submit">
+//     </form>`
+// })
+// export class InputForm {
+//   sendMessage(message) {
+//     let messageString = JSON.stringify(message);
+//     console.log("Message string: " + messageString)
+//     console.log("-> tx " + message);
+//     ws.send(JSON.stringify(message));
+//   }
+// }
 
 @Component({
   selector: 'app-output-form',
@@ -43,4 +53,6 @@ export class ClickMeComponent {
   }
 }
 
-
+ws.onopen = function() {
+  // Do nothing
+}
