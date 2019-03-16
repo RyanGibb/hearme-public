@@ -22,10 +22,6 @@ httpServer.listen(port, function () {
   console.log('Listening for HTTP requests on port: ' + port);
 });
 
-var server = app.listen(port, () => {
-    console.log('Server is running..');
-});
-
 // Serve static files, such as css and scripts, from the directory below.
 app.use(express.static(__dirname + '/static_files'));
 
