@@ -1,6 +1,7 @@
 
 const bodyParser = require('body-parser');
 const nexmo = require('nexmo');
+const path = require('path')
 
 //TODO add this to websocket lol
 //bodyParser.urlencoded({ extended: true})
@@ -62,11 +63,15 @@ httpServer.listen(port, function () {
 });
 
 // Serve static files, such as css and scripts, from the directory below.
-app.use(express.static(__dirname + '/static_files'));
+app.use(express.static(__dirname + '/frontend/my-app/dist/my-app/'));
 
 app.get('/nexmo_event', function (req, res) {
   console.log("Nexmo event: " + req);
 });
+
+// app.get('/', function(req, res) {
+//     res.sendFile(path.resolve('./frontend/my-app/dist/my-app/index.html'));
+// });
 //----------------------------------------------------------------------------
 //                              WebSocket Server
 //----------------------------------------------------------------------------
