@@ -91,24 +91,19 @@ app.get(EVENT_PATH, function (req, res) {
   console.log('Nexmo event: ' + req);
 });
 
-app.get(ANSWER_PATH, function (req, res) {
-  res.setHeader('Content-Type', 'application/json');
-  let ncco = [
-    {
-      'action':'talk',
-      'name': 'hearme',
-      'text': START_TEXT
-    }
-  ];
-  res.end(JSON.stringify(ncco));
-});
-
 // Make a phone call, returns the call uuid
 function call(to_number, callback) {
   nexmo.calls.create({
     to: [{type: 'phone', number: to_number}],
     from: {type: 'phone', number: FROM_NUMBER},
-    answer_url: [url + ANSWER_PATH],
+    //answer_url: [url + ANSWER_PATH],
+    ncco: [
+      {
+        'action':'talk',
+        'name': 'hearme',
+        'text': START_TEXT
+      }
+    ],
     event_url: [url + EVENT_PATH]
   }, function (err, res) {
     if(err) {
