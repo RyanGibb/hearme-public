@@ -69,9 +69,7 @@ app.get('/nexmo_event', function (req, res) {
   console.log("Nexmo event: " + req);
 });
 
-// app.get('/', function(req, res) {
-//     res.sendFile(path.resolve('./frontend/my-app/dist/my-app/index.html'));
-// });
+
 //----------------------------------------------------------------------------
 //                              WebSocket Server
 //----------------------------------------------------------------------------

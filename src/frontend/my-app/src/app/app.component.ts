@@ -42,3 +42,5 @@ export class ClickMeComponent {
     this.clickMessage = 'You are my hero!';
   }
 }
+
+
