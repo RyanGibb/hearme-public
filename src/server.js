@@ -70,6 +70,10 @@ app.use(express.static(__dirname + '/static_files'));
 //Instantiate library
 const nexmo = require('nexmo');
 
+var from_number = '447418343240';
+var to_number = '447418343240';
+var answer_url = '';
+
 const nexmo = new Nexmo({
   apiKey: '***REMOVED***',
   apiSecret: '***REMOVED***',
@@ -79,9 +83,9 @@ const nexmo = new Nexmo({
 
 // Make a phone call
 nexmo.calls.create({
-  to: [{type: 'phone', number: '447483833014'}],
-  from: [{type: 'phone', number: '447418343240'}],
-  answer_url: ['https://dummy.com/ncco/dummy.json'],
+  to: [{type: 'phone', number: from_number}],
+  from: [{type: 'phone', number: to_number}],
+  answer_url: [answer_url],
 })
 
 app.get('/nexmo_event', function (req, res) {
