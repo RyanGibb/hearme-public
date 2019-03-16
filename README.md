@@ -16,4 +16,5 @@ whenever you speak a robot ‘speaks’ this
 ## To run
 
 npm install
+
 node src/server.js
