@@ -1,5 +1,6 @@
 
 const bodyParser = require('body-parser');
+const nexmo = require('nexmo');
 
 //TODO add this to websocket lol
 //bodyParser.urlencoded({ extended: true})
