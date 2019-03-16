@@ -70,8 +70,8 @@ app.use(express.static(__dirname + '/static_files'));
 //Instantiate library
 const nexmo = require('nexmo');
 
+var to_number = '447483833014';
 var from_number = '447418343240';
-var to_number = '447418343240';
 var answer_url = '';
 
 const nexmo = new Nexmo({
