@@ -1,14 +1,6 @@
 
-const bodyParser = require('body-parser');
-const nexmo = require('nexmo');
-const path = require('path')
-
-//TODO add this to websocket lol
-//bodyParser.urlencoded({ extended: true})
-//bodyParser.json()
-
 //----------------------------------------------------------------------------
-//                             Google speech to text stuff
+//                             Google Speech to Text
 //----------------------------------------------------------------------------
 
 async function speechToText() {
@@ -65,10 +57,81 @@ httpServer.listen(port, function () {
 // Serve static files, such as css and scripts, from the directory below.
 app.use(express.static(__dirname + '/frontend/my-app/dist/my-app/'));
 
-app.get('/nexmo_event', function (req, res) {
-  console.log("Nexmo event: " + req);
+//----------------------------------------------------------------------------
+//                             Nexmo
+//----------------------------------------------------------------------------
+
+const url = 'http://www.example.com';
+
+const Nexmo = require('nexmo');
+
+const seamus = '447955753134';
+const ryan = '447551580894';
+const george = '447543507436';
+
+const FROM_NUMBER = '447418343240';
+const ANSWER_PATH = '/nexmo_answer';
+const EVENT_PATH = '/nexmo_event';
+const DEFAULT_VOICE = 'Kimberly';
+
+const START_TEXT = 'This is an system for the hearing impaired to be able to '
+                    + 'communicate over the phone through a web interface. '
+                    + 'Visit ' + url;
+
+const nexmo = new Nexmo({
+  apiKey: '***REMOVED***',
+  apiSecret: '***REMOVED***',
+  applicationId: '***REMOVED***',
+  privateKey:'private.key',
+}, {
+  debug: true
 });
 
+app.get(EVENT_PATH, function (req, res) {
+  console.log('Nexmo event: ' + req);
+});
+
+// Make a phone call, returns the call uuid
+function call(to_number, callback) {
+  nexmo.calls.create({
+    to: [{type: 'phone', number: to_number}],
+    from: {type: 'phone', number: FROM_NUMBER},
+    //answer_url: [url + ANSWER_PATH],
+    ncco: [
+      {
+        'action':'talk',
+        'name': 'hearme',
+        'text': START_TEXT
+      }
+    ],
+    event_url: [url + EVENT_PATH]
+  }, function (err, res) {
+    if(err) {
+      console.error(err);
+      callback(err)
+    }
+    else {
+      console.log(res);
+      callback(null, res.uuid);
+    }
+  });
+}
+
+function speak(uuid, text, callback) {
+  nexmo.calls.talk.start(uuid, { text: text, voice_name: DEFAULT_VOICE },
+    (err, res) => {
+      if(err) { console.error(err); }
+      else {
+          console.log(res);
+      }
+    }
+  );
+  callback(null);
+}
+
+function hangup(uuid, callback) {
+  nexmo.calls.update(callId, { action: 'hangup' }, callback);
+}
 
 //----------------------------------------------------------------------------
 //                              WebSocket Server
@@ -86,26 +149,46 @@ wsServer.on('connection', function(ws, req) {
         + req.connection.remotePort + ' Code ' + code);
   });
 
-  ws.on('message', function(data) {
+  ws.on('message', function(text) {
     let msgString = data.toString();
     wsMsgLog('WS -> rx ', req, msgString);
     try {
-      var receivedMessage = JSON.parse(messageString);
+      var msg = JSON.parse(msgString);
     }
     catch(error) {
       respondError(ws, req, 'error parsing JSON request', error);
       return;
     }
 
-    // TODO process message
+    if (msg.request == 'call') {
+      call(msg.number, function(error, uuid) {
+        if (error) {
+          respondError(ws, req, "error calling number", error);
+        } else {
+          let response = "call";
+          let message = { response, uuid };
+          respond(ws, req, message);
+        }
+      })
+    }
+    else if (msg.request == 'message') {
+      speak(msg.uuid, msg.text, function(error) {
+        if(error) {
+          respondError(ws, req, "error sending message \"" + msg.txt + "\"", error);
+        }
+      });
+    }
+    else {
+      respondError(ws, req, 'unsupported request ' + receivedMessage.request + '\'');
+    }
 
   })
 });
 
 function respondError(ws, req, human_readable_error, error) {
-  let responce = 'error';
-  responceMessage = {responce, human_readable_error, error};
-  respond(ws, req, responceMessage);
+  let response = 'error';
+  responseMessage = {response, human_readable_error, error};
+  respond(ws, req, responseMessage);
 }
 
 function respond(ws, req, msg) {
@@ -118,6 +201,6 @@ const lenLog = 200;
 
 function wsMsgLog(prefix, req, msg) {
   console.log(prefix + req.connection.remoteAddress + ':' + req.connection.remotePort + ' ' +
-    (msg.length > lenLog ? msg.slice(0, lenLog) + "..." : msg)
+    (msg.length > lenLog ? msg.slice(0, lenLog) + '...' : msg)
   );
 }
