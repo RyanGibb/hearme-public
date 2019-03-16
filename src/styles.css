@@ -1,0 +1,21 @@
+body{
+  background-color: #ffffff;
+}
+
+h1{
+  text-align: center;
+  font-family: 'Nobile', Helvetica, Arial, sans-serif;
+}
+
+p{
+  text-align: center;
+}
+
+html{
+  font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+}
+
+button{
+  height: 50px;
+  width: 50px;
+}
