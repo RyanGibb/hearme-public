@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Shamebob/HackTheBurgh5#readme",
   "dependencies": {
+    "@google-cloud/speech": "^2.3.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "ws": "^6.2.0"

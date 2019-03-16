@@ -15,6 +15,10 @@ whenever you speak a robot ‘speaks’ this
 
 ## To run
 
+Navigate to src directory.
+
 npm install
 
-node src/server.js
+node server.js
+
+export GOOGLE_APPLICATION_CREDENTIALS="./HTB5-aa5e413a7301.json"
