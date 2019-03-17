@@ -22,9 +22,8 @@
     "express": "^4.16.4",
     "nexmo": "^2.4.1",
     "react": "^16.8.4",
-    "websocket": "^1.0.28",
-    "ws": "^6.2.0",
-    "wss": "^3.3.4"
+    "rxjs": "^6.4.0",
+    "ws": "^6.2.0"
   },
   "devDependencies": {},
   "description": ""
