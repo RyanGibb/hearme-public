@@ -11,30 +11,11 @@ export class AppComponent {
   title = 'Hear Me';
 }
 
-// @Component({
-//   selector: 'app-input-form',
-//   template: `
-//     <form onsubmit = sendMessage(Submit)>
-//     Enter what you'd like to say in the phone call.<br>
-//     <input type="text" name="UserInput"><br>
-//     <input type="submit" value="Submit">
-//     </form>`
-// })
-// export class InputForm {
-//   sendMessage(message) {
-//     let messageString = JSON.stringify(message);
-//     console.log("Message string: " + messageString)
-//     console.log("-> tx " + message);
-//     ws.send(JSON.stringify(message));
-//   }
-// }
-
 @Component({
   selector: 'app-output-form',
   template: `
-    <form>
-    Caller's response:<br>
-    <input type="text" name="CallerResponse"><br>`
+  <label for="OutputArea">Caller Response</label>
+  <textarea class="form-control" id="OutputArea" rows="6"></textarea>`
 })
 export class OutputForm {
 }

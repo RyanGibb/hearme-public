@@ -13,12 +13,26 @@ export class InputFormComponent implements OnInit {
 
   model = new ConnectionData('call', '', '');
   submitted = false;
+  enabled = 'true';
 
 
   onSubmit(messageString) {
-    this.submitted = true;
-    console.log("-> tx " + JSON.stringify(messageString));
-    wss.send(JSON.stringify(messageString));
+    if (!this.submitted) {
+      this.submitted = true;
+      console.log("-> tx " + JSON.stringify(messageString));
+      wss.send(JSON.stringify(messageString));
+    } else {
+      console.log("-> tx " + JSON.stringify(messageString));
+      wss.send(JSON.stringify(messageString));
+    }
+  }
+
+  isValid() {
+    if(this.submitted) {
+        this.enabled = 'disabled'
+    } else {
+        this.enabled = 'enabled'
+    }
   }
 
   get diagnostic() { return JSON.stringify(this.model); }
