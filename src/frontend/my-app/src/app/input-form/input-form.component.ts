@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ConnectionData } from '../connection_data'
 
-let wsUrl = "wss://" + location.hostname + ":" + location.port;
+let wsUrl = "ws://" + location.hostname + ":" + location.port;
 let wss = new WebSocket(wsUrl);
 
 @Component({
