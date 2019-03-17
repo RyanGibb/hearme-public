@@ -46,7 +46,7 @@ li a{
 }
 
 li a:hover{
-  background-color: white;
+  background-color: #63d86d;
 }
 
 
@@ -56,4 +56,9 @@ li a:hover{
   margin: 0 auto;
   height: 5px;
   opacity: 0.5;
+}
+
+#Logo{
+  height:400px;
+  width:200px;
 }
