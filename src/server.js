@@ -350,22 +350,22 @@ class RecognizeStream {
 //                            Test
 //----------------------------------------------------------------------------
 
-call(ryan, "the quick brown fox jumped over the lazy dog", function(error, uuid) {
-  if(error) {
-    console.log("TEST ERROR CALL " + JSON.stringify(error));
-  }
-  // else {
-  //   setTimeout(function() {
-  //     speak(uuid, "white apple",
-  //       function(error, res) {
-  //         if(error) {
-  //           console.log("TEST ERROR SPEAK " + JSON.stringify(error));
-  //         }
-  //         else {
-  //           console.log("TEST SPEAK RESPONSE " + JSON.stringify(res));
-  //         }
-  //       }
-  //     )
-  //   }, 8000);
-  // }
-});
+// call(ryan, "the quick brown fox jumped over the lazy dog", function(error, uuid) {
+//   if(error) {
+//     console.log("TEST ERROR CALL " + JSON.stringify(error));
+//   }
+//   // else {
+//   //   setTimeout(function() {
+//   //     speak(uuid, "white apple",
+//   //       function(error, res) {
+//   //         if(error) {
+//   //           console.log("TEST ERROR SPEAK " + JSON.stringify(error));
+//   //         }
+//   //         else {
+//   //           console.log("TEST SPEAK RESPONSE " + JSON.stringify(res));
+//   //         }
+//   //       }
+//   //     )
+//   //   }, 8000);
+//   // }
+// });
