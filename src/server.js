@@ -90,7 +90,7 @@ function wsLog(prefix, req, msg) {
 //                             Nexmo
 //----------------------------------------------------------------------------
 
-const domain = 'http://22571b99.ngrok.io';
+const domain = 'http://17ee8339.ngrok.io';
 
 const Nexmo = require('nexmo');
 
@@ -127,20 +127,23 @@ function call(to_number, message, callback) {
       from: {type: 'phone', number: FROM_NUMBER},
       ncco: [
         {
+          "action" : "talk",
+          "text" : "You have recieved a message from a hearing impaired person. "+message+" Please leave a reply after the beep and end your message with the hash key."
+        },
+        {
+          "action" : "input",
+          "timeOut" : 10,
           "action" : "record",
+          "endOnKey" : '#',
+          "beepStart" : 'true',
           "format" : "wav",
           "eventUrl": [domain + EVENT_PATH_RECORDING]
         },
         {
           "action" : "talk",
-          "text" : message
-        },
-        {
-          "action" : "input",
-          "timeOut" : 10
+          "text" : "Thank you for your reply."
         }
-      ],
-      event_url: [domain + EVENT_PATH]
+      ]
     },
     function (err, res) {
       if(err) {
@@ -246,17 +249,6 @@ async function speechToText(con_uuid) {
 
   //  respondError(connection[0], connection[1], "Error parsing audio", error);
   //return transcript;
-
-
-
-  // let ws = connection[0];
-  // let req = connection[1];
-  // let response = "call";
-  // let message = transcription;
-  // //respond(connection[0], connection[1], {response, message});
-  // let messageString = JSON.stringify(message);
-  // ws.send(messageString);
-  // wsLog('WS <- tx ', req, messageString);
 }
 
 //----------------------------------------------------------------------------

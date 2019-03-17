@@ -1,27 +1,23 @@
-# HackTheBurgh5
-:peach: :eggplant: :heart: :monkey:
+## What inspired us
+We were _inspired_ by APIs developed by **Nexmo**, and **J.P.Morgan**'s empowerment ideas. **HearMe** is our website, aimed at people who have hearing impairments or other conditions which make telephone conversations difficult or impossible. 
 
-Base idea so far
+## What does HearMe do
+**HearMe** has a simple clean interface which takes in two arguments and returns one. It takes a phone number and a message. **HearMe** then calls the given number using the **Nexmo API** and speaks the message. The message is read live, and changes made during the call to the field will be spoken in the call. The speech from the other user is converted to text and then output to the interface. It is _'a voice for those who need it'_. 
 
-deaf person want to call someone
+## How we built it
+Through the division of labour, we began the process with pair programming. Two of our team members were experienced with **Node.js** and the other two had other _skills_. This allowed the less experienced team members to catch up rapidly.
+We used an **angular** front end and a **Node.js** backend. This allowed for asynchronous development which didn't interfere with one another.
+**Git** was used as our version control methodology. 
 
-put in a phone number
+## Plans for HearMe
+We're proud of **HearMe**, and feel with further development it could become a genuinely assistive tool for those who require it.
 
-call this
+## Challenges we ran into
+Some of our team members struggled with merging code inefficiently. We should make better use of branches next time.
 
-whenever person on other end speaks its interpreted as text
+We learned a lot about **Nexmo APIs**, which was a really interesting learning opportunity. All favouring **Java** and **Python**, we stepped a little out of our comfort zones using **Angular**, **Node.js** and lots of **HTML** and **CSS**.
 
-whenever you speak a robot ‘speaks’ this
+## Future plans for HearMe
+The speech to text needs some work. And the conversations aren't as seamless as we originally hoped. However, for a short prototype, we are very pleased with the results. 
 
-
-nexmo call recording endOnSilence should break up a call by everytime the non deaf person stops speaking
-
-## To run
-
-Navigate to src directory.
-
-npm install
-
-node server.js
-
-export GOOGLE_APPLICATION_CREDENTIALS="./HTB5-aa5e413a7301.json"
+We plan to implement keypad use on the receiving end, where the person speaks and presses a predetermined key to signify the end of their message. This would allow a full conversation to take place much more easily.
