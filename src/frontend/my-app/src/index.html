@@ -40,15 +40,15 @@ ws.onopen = function(event) {
   console.log("WebSocket is open now.");
 };
 
-aWebSocket.onmessage = function(event) {
+ws.onmessage = function(event) {
   console.debug("WebSocket message received:", event);
 };
 
-aWebSocket.onerror = function(event) {
+ws.onerror = function(event) {
   console.error("WebSocket error observed:", event);
 };
 
-aWebSocket.onclose = function(event) {
+ws.onclose = function(event) {
   console.log("WebSocket is closed now.");
 };
 

@@ -29,7 +29,7 @@ const wsServer = new ws.Server({server: httpServer});
 wsServer.on('connection', function(ws, req) {
   wsLog('WS connection ', req, '');
 
-  ws.on('close', function(code, msg) {
+  ws.on('close', function(code, req) {
     console.log('WS disconnection ' + ws._socket.remoteAddress + ':'
         + req.connection.remotePort + ' Code ' + code);
   });
