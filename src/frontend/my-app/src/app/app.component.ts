@@ -32,6 +32,8 @@ export class OutputForm {
     } else if (message.response === "error") {
       console.log(message.human_readable_error);
       console.log(message.error);
+    }else {
+      console.log(JSON.parse(m.data));
     }
     
   }
