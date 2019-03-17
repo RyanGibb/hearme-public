@@ -90,7 +90,7 @@ function wsLog(prefix, req, msg) {
 //                             Nexmo
 //----------------------------------------------------------------------------
 
-const domain = 'http://22571b99.ngrok.io';
+const domain = 'http://95f51413.ngrok.io';
 
 const Nexmo = require('nexmo');
 
@@ -103,9 +103,7 @@ const EVENT_PATH = '/nexmo_event';
 const EVENT_PATH_RECORDING = '/recordings';
 const DEFAULT_VOICE = 'Kimberly';
 
-const START_TEXT = 'This is an system for the hearing impaired to be able to '
-                    + 'communicate over the phone through a web interface. '
-                    + 'Visit ' + domain;
+const MESSAGE_PREFIX = 'You are being called by someone with a hearing imparement.';
 
 const nexmo = new Nexmo({
   apiKey: '***REMOVED***',
@@ -126,15 +124,14 @@ function call(to_number, message, callback) {
       to: [{type: 'phone', number: to_number}],
       from: {type: 'phone', number: FROM_NUMBER},
       ncco: [
-
+        {
+          "action" : "talk",
+          "text" : MESSAGE_PREFIX + message
+        },
         {
           "action" : "record",
           "format" : "wav",
           "eventUrl": [domain + EVENT_PATH_RECORDING]
-        },
-        {
-          "action" : "talk",
-          "text" : message
         },
         {
           "action" : "input",
