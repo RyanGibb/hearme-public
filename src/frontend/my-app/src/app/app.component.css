@@ -49,6 +49,10 @@ li{
   float: right;
 }
 
+a{
+  text-decoration: none;
+}
+
 li a{
   text-decoration: none;
   display: block;
