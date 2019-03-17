@@ -27,6 +27,8 @@ const ws = require('ws');
 
 const wsServer = new ws.Server({server: httpServer});
 
+var users = {};
+
 wsServer.on('connection', function(ws, req) {
   wsLog('WS connection ', req, '');
 
@@ -47,25 +49,13 @@ wsServer.on('connection', function(ws, req) {
     }
 
     if (msg.request == 'call') {
-      if (!msg.message) {
-        msg.message = START_MESSAGE;
-      }
       call(msg.number, msg.message, function(error, uuid) {
         if (error) {
           respondError(ws, req, "error calling number", error);
         } else {
-          let response = "call";
-          let message = { response, uuid };
-          respond(ws, req, message);
+          users[uuid] = [ws, req];
         }
       })
-    }
-    else if (msg.request == 'message') {
-      speak(msg.uuid, msg.text, function(error) {
-        if(error) {
-          respondError(ws, req, "error sending message \"" + msg.txt + "\"", error);
-        }
-      });
     }
     else {
       respondError(ws, req, 'unsupported request ' + receivedMessage.request + '\'');
@@ -142,6 +132,10 @@ function call(to_number, message, callback) {
         {
           "action" : "talk",
           "text" : message
+        },
+        {
+          "action" : "input",
+          "timeOut" : 10
         }
       ],
       event_url: [domain + EVENT_PATH]
@@ -153,7 +147,7 @@ function call(to_number, message, callback) {
       }
       else {
         console.log(res);
-        callback(null, res.uuid);
+        callback(null, res.conversation_uuid);
       }
     }
   );
@@ -193,22 +187,17 @@ app.post(EVENT_PATH_RECORDING, function(req, res) {
                           languageCode: getparams.langCode,
                           user: getparams.from
                           }
+          connection = users[params.conversation_uuid];
+          speechToText(params.conversation_uuid, connection);
+
       }
     });
     res.writeHead(204);
     res.end();
 });
 
-async function speechToText() {
-  // Imports the Google Cloud client library
-  const speech = require('@google-cloud/speech');
-  const fs = require('fs');
-
-  // Creates a client
-  const client = new speech.SpeechClient();
-
-  // The name of the audio file to transcribe
-  const fileName = 'audio.wav';
+async function speechToText(con_uuid, connections) {
+  const fileName = "files/"+con_uuid+".wav";
 
   // Reads a local audio file and converts it to base64
   const file = fs.readFileSync(fileName);
@@ -229,33 +218,40 @@ async function speechToText() {
   };
 
   // Detects speech in the audio file
-  const [response] = await client.recognize(request);
-  const transcription = response.results
+  const [responseSPEECH] = await speech.recognize(request);
+  const transcription = responseSPEECH.results
     .map(result => result.alternatives[0].transcript)
     .join('\n');
-  return ${transcription};
+  console.log(`Transcription: ${transcription}`);
+
+
+  let response = "call";
+  let message = transcription;
+  respond(connection[0], connection[1], {response, message});
+  //  respondError(connection[0], connection[1], "Error parsing audio", error);
+  //return transcript;
 }
 
 //----------------------------------------------------------------------------
 //                            Test
 //----------------------------------------------------------------------------
 
-call(ryan, "the quick brown fox jumped over the lazy dog", function(error, uuid) {
-  if(error) {
-    console.log("TEST ERROR CALL " + JSON.stringify(error));
-  }
-//   // else {
-//   //   setTimeout(function() {
-//   //     speak(uuid, "white apple",
-//   //       function(error, res) {
-//   //         if(error) {
-//   //           console.log("TEST ERROR SPEAK " + JSON.stringify(error));
-//   //         }
-//   //         else {
-//   //           console.log("TEST SPEAK RESPONSE " + JSON.stringify(res));
-//   //         }
-//   //       }
-//   //     )
-//   //   }, 8000);
-//   // }
-});
+// call(ryan, "the quick brown fox jumped over the lazy dog", function(error, uuid) {
+//   if(error) {
+//     console.log("TEST ERROR CALL " + JSON.stringify(error));
+//   }
+// //   // else {
+// //   //   setTimeout(function() {
+// //   //     speak(uuid, "white apple",
+// //   //       function(error, res) {
+// //   //         if(error) {
+// //   //           console.log("TEST ERROR SPEAK " + JSON.stringify(error));
+// //   //         }
+// //   //         else {
+// //   //           console.log("TEST SPEAK RESPONSE " + JSON.stringify(res));
+// //   //         }
+// //   //       }
+// //   //     )
+// //   //   }, 8000);
+// //   // }
+// });
