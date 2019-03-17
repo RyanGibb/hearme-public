@@ -72,7 +72,7 @@ const george = '447543507436';
 const FROM_NUMBER = '447418343240';
 const ANSWER_PATH = '/nexmo_answer';
 const EVENT_PATH = '/nexmo_event';
-const DEFAULT_VOICE = 'Kimberly';
+const DEFAULT_VOICE = 'Chipmunk';
 
 const START_TEXT = 'This is an system for the hearing impaired to be able to '
                     + 'communicate over the phone through a web interface. '
