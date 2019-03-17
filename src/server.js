@@ -28,10 +28,11 @@ const wsServer = new ws.Server({server: httpServer});
 
 wsServer.on('connection', function(ws, req) {
   wsLog('WS connection ', req, '');
+  ws.send(JSON.stringify("Hello"));;
 
   ws.on('close', function(code, req) {
     console.log('WS disconnection ' + ws._socket.remoteAddress + ':'
-        + req.connection.remotePort + ' Code ' + code);
+        + ws._socket + ' Code ' + code);
   });
 
   ws.on('message', function(data) {

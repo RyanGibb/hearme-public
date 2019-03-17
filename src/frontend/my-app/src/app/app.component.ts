@@ -21,27 +21,16 @@ export class AppComponent {
 })
 
 export class OutputForm {
-  // ws.onmessage () => function(m) {
-  //   let messageString = m.data;
-  //   console.log("<- rx " + messageString);
-  //   let message = JSON.parse(messageString);1
-  //   handleMessage(message);
-  // }
-//   ngOnInit() {
-//     console.log("Running")
-//     // const subscription = interval(1000);
-//     // subscription.subscribe(() => {
-//       ws.onmessage = function(m) {
-//         console.log("recvv");
-//         let messageString = m.data;
-//         console.log("<- rx " + messageString);
-//         let message = JSON.parse(messageString);
-//       // handleMessage(message);});
-//       } 
-//     // });
-//   }
-}
+  ngOnInit() {
+    ws.onmessage = function(m) {
+    let messageString = m.data;
+    console.log("<- rx " + messageString);
+    let message = JSON.parse(messageString);
+    document.getElementById("OutputArea").innerHTML += message
+    }
+  }
 
+}
 
 @Component({
   selector: 'app-click-me',

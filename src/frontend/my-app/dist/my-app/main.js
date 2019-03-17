@@ -80,6 +80,14 @@ var AppComponent = /** @class */ (function () {
 var OutputForm = /** @class */ (function () {
     function OutputForm() {
     }
+    OutputForm.prototype.ngOnInit = function () {
+        ws.onmessage = function (m) {
+            var messageString = m.data;
+            console.log("<- rx " + messageString);
+            var message = JSON.parse(messageString);
+            document.getElementById("OutputArea").innerHTML += message;
+        };
+    };
     OutputForm = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-output-form',
@@ -175,6 +183,14 @@ var ConnectionData = /** @class */ (function () {
         this.number = number;
         this.message = message;
     }
+    /**
+     * clear_message
+     */
+    ConnectionData.prototype.clear_message = function () {
+        this.message = "";
+    };
+    ConnectionData.prototype.conversation = function () {
+    };
     return ConnectionData;
 }());
 
@@ -200,7 +216,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "{{diagnostic}}\n<form (ngSubmit)=\"onSubmit(model)\" #inputForm=\"ngForm\">\n  <div class=\"form-group\">\n    <label for=\"number\">Phone Number</label>\n    <input type=\"text\" class=\"form-control\" id=\"number\"\n          required\n          [(ngModel)]=\"model.number\" name=\"number\">\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"message\">Message</label>\n    <textarea type=\"text\"  class=\"form-control\" id=\"message\"\n          [(ngModel)]=\"model.message\" name=\"message\" rows=\"2\"></textarea>\n  </div>\n  <button type=\"submit\" class=\"btn btn-success\" [disabled]=\"!inputForm.form.valid\">Submit</button>\n</form>"
+module.exports = "<!-- {{diagnostic}} -->\n<form (ngSubmit)=\"onSubmit(model)\" #inputForm=\"ngForm\">\n  <div class=\"form-group\">\n    <label for=\"number\">Phone Number</label>\n    <input type=\"text\" class=\"form-control\" id=\"number\"\n          required\n          [(ngModel)]=\"model.number\" name=\"number\">\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"message\">Message</label>\n    <textarea type=\"text\"  class=\"form-control\" id=\"message\"\n          [(ngModel)]=\"model.message\" name=\"message\" rows=\"2\"></textarea>\n  </div>\n  <button type=\"submit\" class=\"btn btn-success\" [disabled]=\"!inputForm.form.valid\">Submit</button>\n</form>"
 
 /***/ }),
 
@@ -238,6 +254,7 @@ var InputFormComponent = /** @class */ (function () {
             console.log("-> tx " + JSON.stringify(messageString));
             wss.send(JSON.stringify(messageString));
         }
+        this.model.clear_message();
     };
     InputFormComponent.prototype.isValid = function () {
         if (this.submitted) {
