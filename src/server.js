@@ -11,11 +11,87 @@ const app = express();
 const httpServer = http.createServer(app);
 
 httpServer.listen(port, function () {
-  console.log('Listening for HTTP requests on port: ' + port);
+  console.log('httpServer on port: ' + port);
 });
 
 // Serve static files, such as css and scripts, from the directory below.
 app.use(express.static(__dirname + '/frontend/my-app/dist/my-app/'));
+
+
+//----------------------------------------------------------------------------
+//                              WebSocket Server
+//----------------------------------------------------------------------------
+
+const ws = require('ws');
+
+const wsServer = new ws.Server({server: httpServer});
+
+wsServer.on('connection', function(ws, req) {
+  wsLog('WS connection ', req, '');
+
+  ws.on('close', function(code, msg) {
+    console.log('WS disconnection ' + ws._socket.remoteAddress + ':'
+        + req.connection.remotePort + ' Code ' + code);
+  });
+
+  ws.on('message', function(data) {
+    let msgString = data.toString();
+    wsLog('WS -> rx ', req, msgString);
+    try {
+      var msg = JSON.parse(msgString);
+    }
+    catch(error) {
+      respondError(ws, req, 'error parsing JSON request', error);
+      return;
+    }
+
+    if (msg.request == 'call') {
+      if (!msg.message) {
+        msg.message = START_MESSAGE;
+      }
+      call(msg.number, msg.message, function(error, uuid) {
+        if (error) {
+          respondError(ws, req, "error calling number", error);
+        } else {
+          let response = "call";
+          let message = { response, uuid };
+          respond(ws, req, message);
+        }
+      })
+    }
+    else if (msg.request == 'message') {
+      speak(msg.uuid, msg.text, function(error) {
+        if(error) {
+          respondError(ws, req, "error sending message \"" + msg.txt + "\"", error);
+        }
+      });
+    }
+    else {
+      respondError(ws, req, 'unsupported request ' + receivedMessage.request + '\'');
+    }
+
+  })
+});
+
+function respondError(ws, req, human_readable_error, error) {
+  let response = 'error';
+  responseMessage = {response, human_readable_error, error};
+  respond(ws, req, responseMessage);
+}
+
+function respond(ws, req, msg) {
+  var msgString = JSON.stringify(msg);
+  ws.send(msgString);
+  wsLog('WS <- tx ', req, msgString);
+};
+
+const lenLog = 200;
+
+function wsLog(prefix, req, msg) {
+  console.log(prefix + req.connection.remoteAddress + ':' + req.connection.remotePort + ' ' +
+    (msg.length > lenLog ? msg.slice(0, lenLog) + '...' : msg)
+  );
+}
 
 //----------------------------------------------------------------------------
 //                             Nexmo
@@ -81,7 +157,7 @@ function call(to_number, message, callback) {
            "endpoint": [
                {
                   //"uri": "ws://sound-machine-234713.appspot.com/nexmosocket",
-                  "uri": "ws://sound-machine-234713.appspot.com",
+                  "uri": "ws://sound-machine-234713.appspot.com:" + (port + 1),
                   "type": "websocket",
                   "content-type": "audio/l16;rate=8000"//,
                   //"headers": {}
@@ -111,27 +187,6 @@ function speak(uuid, text, callback) {
 function hangup(uuid, callback) {
   nexmo.calls.update(callId, { action: 'hangup' }, callback);
 }
-
-
-call(ryan, "the quick brown fox jumped over the lazy dog", function(error, uuid) {
-  if(error) {
-    console.log("TEST ERROR CALL " + JSON.stringify(error));
-  }
-  // else {
-  //   setTimeout(function() {
-  //     speak(uuid, "white apple",
-  //       function(error, res) {
-  //         if(error) {
-  //           console.log("TEST ERROR SPEAK " + JSON.stringify(error));
-  //         }
-  //         else {
-  //           console.log("TEST SPEAK RESPONSE " + JSON.stringify(res));
-  //         }
-  //       }
-  //     )
-  //   }, 8000);
-  // }
-})
 
 //----------------------------------------------------------------------------
 //                             Google Speech to Text
@@ -175,7 +230,7 @@ const Speech = require('@google-cloud/speech');
 const speech = new Speech.SpeechClient();
 
 //Create a server
-var nexmo_wsserver = http.createServer(
+var httpServerNexmo = http.createServer(
   function (req, res) {
     // do nothing
     // res.writeHead(200, {'Content-Type': 'text/plain'});
@@ -184,13 +239,17 @@ var nexmo_wsserver = http.createServer(
   }
 );
 
+httpServerNexmo.listen(port + 1, function () {
+  console.log('httpServerNexmo on port: ' + (port + 1));
+});
+
 var nexmows = new WebSocketServer({
-    httpServer: nexmo_wsserver,
+    httpServer: httpServerNexmo,
     autoAcceptConnections: true,
 });
 
 // Receive Recording
-app.post("/recording", function(req, res) {
+app.post(EVENT_PATH_RECORDING, function(req, res) {
     var parsedUrl = url.parse(req.url, true); // true to get query as object
     var getparams = parsedUrl.query;
     var params = JSON.parse(req.body);
@@ -288,76 +347,25 @@ class RecognizeStream {
 }
 
 //----------------------------------------------------------------------------
-//                              WebSocket Server
+//                            Test
 //----------------------------------------------------------------------------
 
-const ws = require('ws');
-
-const wsServer = new ws.Server({server: httpServer});
-
-wsServer.on('connection', function(ws, req) {
-  wsLog('WS connection ', req, '');
-
-  ws.on('close', function(code, msg) {
-    console.log('WS disconnection ' + ws._socket.remoteAddress + ':'
-        + req.connection.remotePort + ' Code ' + code);
-  });
-
-  ws.on('message', function(data) {
-    let msgString = data.toString();
-    wsLog('WS -> rx ', req, msgString);
-    try {
-      var msg = JSON.parse(msgString);
-    }
-    catch(error) {
-      respondError(ws, req, 'error parsing JSON request', error);
-      return;
-    }
-
-    if (msg.request == 'call') {
-      if (!msg.message) {
-        msg.message = START_MESSAGE;
-      }
-      call(msg.number, msg.message, function(error, uuid) {
-        if (error) {
-          respondError(ws, req, "error calling number", error);
-        } else {
-          let response = "call";
-          let message = { response, uuid };
-          respond(ws, req, message);
-        }
-      })
-    }
-    else if (msg.request == 'message') {
-      speak(msg.uuid, msg.text, function(error) {
-        if(error) {
-          respondError(ws, req, "error sending message \"" + msg.txt + "\"", error);
-        }
-      });
-    }
-    else {
-      respondError(ws, req, 'unsupported request ' + receivedMessage.request + '\'');
-    }
-
-  })
+call(ryan, "the quick brown fox jumped over the lazy dog", function(error, uuid) {
+  if(error) {
+    console.log("TEST ERROR CALL " + JSON.stringify(error));
+  }
+  // else {
+  //   setTimeout(function() {
+  //     speak(uuid, "white apple",
+  //       function(error, res) {
+  //         if(error) {
+  //           console.log("TEST ERROR SPEAK " + JSON.stringify(error));
+  //         }
+  //         else {
+  //           console.log("TEST SPEAK RESPONSE " + JSON.stringify(res));
+  //         }
+  //       }
+  //     )
+  //   }, 8000);
+  // }
 });
-
-function respondError(ws, req, human_readable_error, error) {
-  let response = 'error';
-  responseMessage = {response, human_readable_error, error};
-  respond(ws, req, responseMessage);
-}
-
-function respond(ws, req, msg) {
-  var msgString = JSON.stringify(msg);
-  ws.send(msgString);
-  wsLog('WS <- tx ', req, msgString);
-};
-
-const lenLog = 200;
-
-function wsLog(prefix, req, msg) {
-  console.log(prefix + req.connection.remoteAddress + ':' + req.connection.remotePort + ' ' +
-    (msg.length > lenLog ? msg.slice(0, lenLog) + '...' : msg)
-  );
-}
