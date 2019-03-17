@@ -49,14 +49,13 @@ module.exports = "<!--The content below is only a placeholder and can be replace
 /*!**********************************!*\
   !*** ./src/app/app.component.ts ***!
   \**********************************/
-/*! exports provided: AppComponent, OutputForm, ClickMeComponent */
+/*! exports provided: AppComponent, OutputForm */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OutputForm", function() { return OutputForm; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ClickMeComponent", function() { return ClickMeComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 
@@ -85,7 +84,14 @@ var OutputForm = /** @class */ (function () {
             var messageString = m.data;
             console.log("<- rx " + messageString);
             var message = JSON.parse(messageString);
-            document.getElementById("OutputArea").innerHTML += message;
+            if (message.response === "call") {
+                console.log("Call");
+                document.getElementById("OutputArea").innerHTML += message.message;
+            }
+            else if (message.response === "error") {
+                console.log(message.human_readable_error);
+                console.log(message.error);
+            }
         };
     };
     OutputForm = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -95,22 +101,6 @@ var OutputForm = /** @class */ (function () {
         })
     ], OutputForm);
     return OutputForm;
-}());
-
-var ClickMeComponent = /** @class */ (function () {
-    function ClickMeComponent() {
-        this.clickMessage = '';
-    }
-    ClickMeComponent.prototype.onClickMe = function () {
-        this.clickMessage = 'You are my hero!';
-    };
-    ClickMeComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-            selector: 'app-click-me',
-            template: "\n    <button (click)=\"onClickMe()\">Click me!</button>\n    {{clickMessage}}"
-        })
-    ], ClickMeComponent);
-    return ClickMeComponent;
 }());
 
 ws.onopen = function () {
