@@ -139,7 +139,7 @@ function call(to_number, message, callback) {
         //   'action': 'talk',
         //   'text': message
         // },
-        // 
+        //
         {
           "action" : "record",
           "format" : "wav",
@@ -148,19 +148,7 @@ function call(to_number, message, callback) {
         {
           "action" : "talk",
           "text" : message
-        },
-        {
-           "action": "connect",
-           "endpoint": [
-               {
-                  //"uri": "ws://sound-machine-234713.appspot.com/nexmosocket",
-                  "uri": "ws://sound-machine-234713.appspot.com",
-                  "type": "websocket",
-                  "content-type": "audio/l16;rate=8000"//,
-                  //"headers": {}
-               }
-           ]
-         }
+        }
       ],
       event_url: [domain + EVENT_PATH]
     },
@@ -194,21 +182,6 @@ const fs = require('fs');
 const Speech = require('@google-cloud/speech');
 const speech = new Speech.SpeechClient();
 
-const httpServerNexmo = http.createServer(app);
-
-httpServerNexmo.listen(port, function () {
-  console.log('httpServerNexmo on port: ' + port);
-});
-
-var nexmows = new ws.Server({server: httpServerNexmo});
-
-wsServer.on('connection', function(ws, req) {
-  wsLog('WS connection ', req, '');
-
-  // ws.on('close', function(code, req) {
-  }
-);
-
 // Receive Recording
 app.post(EVENT_PATH_RECORDING, function(req, res) {
     var parsedUrl = url.parse(req.url, true); // true to get query as object
@@ -232,83 +205,6 @@ app.post(EVENT_PATH_RECORDING, function(req, res) {
     res.end();
 });
 
-// Nexmo Websocket Handler
-nexmows.on('connect', function(connection) {
-    console.log((new Date()) + ' Connection accepted' + ' - Protocol Version ' + connection.webSocketVersion);
-    // Create the stream at the start of the call
-    var recognizeStream = new RecognizeStream(connection);
-});
-
-class RecognizeStream {
-    constructor(connection) {
-        this.streamCreatedAt = null;
-        this.stream = null;
-        this.user = null
-        this.request = {
-          config: {
-            encoding: 'LINEAR16',
-            sampleRateHertz: 8000,
-            languageCode: 'en-UK' //Default Lang, will be updated with value from websocket
-          },
-          interimResults: false // If you want interim results, set this to true
-        };
-        connection.on('message', this.processMessage.bind(this));
-        connection.on('close', this.close.bind(this));
-    }
-
-    processMessage(message){
-        if (message.type === 'utf8') {
-            // Log the initial Message
-            var data = JSON.parse(message.utf8Data)
-            this.request.config.languageCode = data.languageCode
-            this.user = data.user
-        }
-        else if (message.type === 'binary') {
-          this.getStream().write(message.binaryData);
-        }
-    }
-
-    close(){
-        this.stream.destroy();
-    }
-
-    newStreamRequired() {
-        // No stream exists
-        if(!this.stream) {
-            return true;
-        }
-        // check time since stream was created.  If 60+ seconds ago create a new stream
-        else {
-            const now = new Date();
-            const timeSinceStreamCreated = (now - this.streamCreatedAt); // returns millis since stream created
-            return (timeSinceStreamCreated/1000) > 60;
-        }
-    }
-
-    // helper function to ensure we always get a stream object with enough time remaining to work with
-    getStream() {
-        if(this.newStreamRequired()) {
-            if (this.stream){
-                this.stream.destroy();
-            }
-            this.streamCreatedAt = new Date();
-            //console.log("Sending request as " + this.request.config.languageCode);
-            this.stream = speech.streamingRecognize(this.request)
-            .on('error', console.error)
-            .on('data', this.sendTranscription.bind(this));
-        }
-        return this.stream;
-    }
-
-    sendTranscription(data){
-        var response = {text: data.results[0].alternatives[0].transcript,
-                        languageCode: this.request.config.languageCode,
-                        user: this.user
-                        }
-        console.log(response);
-        //send to client haha lmao
-    }
-}
 
 //----------------------------------------------------------------------------
 //                            Test
