@@ -55,7 +55,7 @@ wsServer.on('connection', function(ws, req) {
         if (error) {
           respondError(ws, req, "error calling number", error);
         } else {
-          users[conv_uuid] = ws;
+          users[conv_uuid] = [ws, req];
         }
       })
     }
@@ -90,7 +90,7 @@ function wsLog(prefix, req, msg) {
 //                             Nexmo
 //----------------------------------------------------------------------------
 
-const domain = 'http://17ee8339.ngrok.io';
+const domain = 'http://22571b99.ngrok.io';
 
 const Nexmo = require('nexmo');
 
@@ -226,26 +226,8 @@ async function speechToText(con_uuid) {
     .join('\n');
   console.log(`Transcription: ${transcription}`);
 
+  respond(user[0], user[1], { response, message });
 
-  let ws = users[con_uuid];
-  //let response = "call";
-  //let message = transcription;
-  //console.log(JSON.stringify(connection));
-  // console.log("WS:" + JSON.stringify(ws));
-  // console.log("REQ: " + JSON.stringify(req));
-
-    var msgString = {'request':'call', 'message':transcription};
-    var sendVar = JSON.stringify(msgString);
-    console.log(sendVar)
-      ws.send(sendVar);
-    console.log("WS AUDIO <- " + ' ' +
-      (msgString.length > lenLog ? msgString.slice(0, lenLog) + '...' : msgString)
-    );
-
-  //respond(user[0], user[1], {'response':'call', 'message':transcription});
-
-  //  respondError(connection[0], connection[1], "Error parsing audio", error);
-  //return transcript;
 }
 
 //----------------------------------------------------------------------------
