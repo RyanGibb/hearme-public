@@ -99,13 +99,13 @@ function call(to_number, message, callback) {
       //answer_url: [url + ANSWER_PATH],
       ncco: [
         {
-          'action':'talk',
+          'action': 'talk',
           'text': message
         },
         {
-          "action": "input",
-          "timeOut": 10,
-          "eventUrl": [url + EVENT_PATH]
+          'action': 'conversation',
+          'name': to_number,
+          'record': 'true'
         }
       ],
       event_url: [url + EVENT_PATH]
@@ -161,7 +161,7 @@ const ws = require('ws');
 const wsServer = new ws.Server({server: httpServer});
 
 wsServer.on('connection', function(ws, req) {
-  wsMsgLog('WS connection ', req, '');
+  wsLog('WS connection ', req, '');
 
   ws.on('close', function(code, msg) {
     console.log('WS disconnection ' + ws._socket.remoteAddress + ':'
@@ -170,7 +170,7 @@ wsServer.on('connection', function(ws, req) {
 
   ws.on('message', function(data) {
     let msgString = data.toString();
-    wsMsgLog('WS -> rx ', req, msgString);
+    wsLog('WS -> rx ', req, msgString);
     try {
       var msg = JSON.parse(msgString);
     }
