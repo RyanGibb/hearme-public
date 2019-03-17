@@ -21,40 +21,21 @@ export class AppComponent {
 })
 
 export class OutputForm {
-  // ws.onmessage () => function(m) {
-  //   let messageString = m.data;
-  //   console.log("<- rx " + messageString);
-  //   let message = JSON.parse(messageString);1
-  //   handleMessage(message);
-  // }
-//   ngOnInit() {
-//     console.log("Running")
-//     // const subscription = interval(1000);
-//     // subscription.subscribe(() => {
-//       ws.onmessage = function(m) {
-//         console.log("recvv");
-//         let messageString = m.data;
-//         console.log("<- rx " + messageString);
-//         let message = JSON.parse(messageString);
-//       // handleMessage(message);});
-//       } 
-//     // });
-//   }
-}
+  ngOnInit() {
+    ws.onmessage = function(m) {
+    let messageString = m.data;
+    console.log("<- rx " + messageString);
+    let message = JSON.parse(messageString);
+    if(message.response === "call") {
+      console.log("Call")
+      document.getElementById("OutputArea").innerHTML += message.message
+    } else if (message.response === "error") {
+      console.log(message.human_readable_error);
+      console.log(message.error);
+    }
+    
+  }
 
-
-@Component({
-  selector: 'app-click-me',
-  template: `
-    <button (click)="onClickMe()">Click me!</button>
-    {{clickMessage}}`
-})
-
-export class ClickMeComponent {
-  clickMessage = '';
-
-  onClickMe() {
-    this.clickMessage = 'You are my hero!';
   }
 }
 
