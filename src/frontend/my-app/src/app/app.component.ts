@@ -20,26 +20,26 @@ export class AppComponent {
   <textarea class="form-control" id="OutputArea" rows="6"></textarea>`
 })
 
-export class OutputForm implements OnInit{
+export class OutputForm {
   // ws.onmessage () => function(m) {
   //   let messageString = m.data;
   //   console.log("<- rx " + messageString);
   //   let message = JSON.parse(messageString);1
   //   handleMessage(message);
   // }
-  ngOnInit() {
-    console.log("Running")
-    // const subscription = interval(1000);
-    // subscription.subscribe(() => {
-      ws.onmessage = function(m) {
-        console.log("recvv");
-        let messageString = m.data;
-        console.log("<- rx " + messageString);
-        let message = JSON.parse(messageString);
-      // handleMessage(message);});
-      } 
-    // });
-  }
+//   ngOnInit() {
+//     console.log("Running")
+//     // const subscription = interval(1000);
+//     // subscription.subscribe(() => {
+//       ws.onmessage = function(m) {
+//         console.log("recvv");
+//         let messageString = m.data;
+//         console.log("<- rx " + messageString);
+//         let message = JSON.parse(messageString);
+//       // handleMessage(message);});
+//       } 
+//     // });
+//   }
 }
 
 

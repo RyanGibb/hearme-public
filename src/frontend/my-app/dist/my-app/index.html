@@ -29,15 +29,27 @@
   let wsUrl = "ws://" + location.hostname + ":" + location.port;
 let ws = new WebSocket(wsUrl);
 
-ws.onmessage = function(m) {
-  console.log("hey");
-  let messageString = m.data;
-  console.log("<- rx " + messageString);
-  let message = JSON.parse(messageString);
-}
+// ws.onmessage = function(m) {
+//   console.log("hey");
+//   let messageString = m.data;
+//   console.log("<- rx " + messageString);
+//   let message = JSON.parse(messageString);
+// }
 
 ws.onopen = function(event) {
   console.log("WebSocket is open now.");
+};
+
+aWebSocket.onmessage = function(event) {
+  console.debug("WebSocket message received:", event);
+};
+
+aWebSocket.onerror = function(event) {
+  console.error("WebSocket error observed:", event);
+};
+
+aWebSocket.onclose = function(event) {
+  console.log("WebSocket is closed now.");
 };
 
 </script>
