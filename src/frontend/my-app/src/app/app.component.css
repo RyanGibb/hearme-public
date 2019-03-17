@@ -15,12 +15,20 @@ h2{
   letter-spacing: 2px;
 }
 
+.about{
+  text-align: center;
+  font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+  font-size: 13px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 h3{
   font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
   float: left;
   text-decoration: none;
   display: block;
-  color: black;
+  color: #999999;
   text-align: center;
   padding: 5px 12px; /* height padding width padding*/
   border-radius: 10%;
