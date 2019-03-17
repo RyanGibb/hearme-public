@@ -161,7 +161,7 @@ const ws = require('ws');
 const wsServer = new ws.Server({server: httpServer});
 
 wsServer.on('connection', function(ws, req) {
-  wsMsgLog('WS connection ', req, '');
+  wsLog('WS connection ', req, '');
 
   ws.on('close', function(code, msg) {
     console.log('WS disconnection ' + ws._socket.remoteAddress + ':'
@@ -170,7 +170,7 @@ wsServer.on('connection', function(ws, req) {
 
   ws.on('message', function(data) {
     let msgString = data.toString();
-    wsMsgLog('WS -> rx ', req, msgString);
+    wsLog('WS -> rx ', req, msgString);
     try {
       var msg = JSON.parse(msgString);
     }
