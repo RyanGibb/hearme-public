@@ -15,8 +15,22 @@ h2{
   letter-spacing: 2px;
 }
 
+h3{
+  font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+  float: left;
+  text-decoration: none;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 5px 12px; /* height padding width padding*/
+  border-radius: 10%;
+  margin: 5px;
+  margin-left: 60px;
+}
+
 p{
   text-align: center;
+  font-size: 40px;
 }
 
 html{
@@ -28,6 +42,7 @@ ul{
   padding: 0px;
   overflow: hidden;
   list-style-type: none;
+  margin-right: 60px
 }
 
 li{
@@ -42,7 +57,7 @@ li a{
   text-align: center;
   padding: 5px 12px; /* height padding width padding*/
   border-radius: 10%;
-  margin: 10px;
+  margin: 5px;
 }
 
 li a:hover{
@@ -56,9 +71,14 @@ li a:hover{
   margin: 0 auto;
   height: 5px;
   opacity: 0.5;
+  margin-top: 8px;
 }
 
 #Logo{
   height:400px;
   width:200px;
+}
+
+#help{
+  font-size: 40px;
 }
