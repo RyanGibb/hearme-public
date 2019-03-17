@@ -30,12 +30,8 @@ const wsServer = new ws.Server({server: httpServer});
 var users = {};
 
 wsServer.on('connection', function(ws, req) {
-  wsLog('WS connection ', req, '');
-  // let jsonSent = {
-  //   'response':'call',
-  //    'message': 'leet'
-  //   }
-  // ws.send(JSON.stringify(jsonSent));;
+
+  //respond(ws, req, {'response':'call', 'message':'test'});
 
   ws.on('close', function(code, req) {
     console.log('WS disconnection ' + ws._socket.remoteAddress + ':'
@@ -44,6 +40,7 @@ wsServer.on('connection', function(ws, req) {
 
   ws.on('message', function(data) {
     let msgString = data.toString();
+
     wsLog('WS -> rx ', req, msgString);
     try {
       var msg = JSON.parse(msgString);
@@ -54,11 +51,11 @@ wsServer.on('connection', function(ws, req) {
     }
 
     if (msg.request == 'call') {
-      call(msg.number, msg.message, function(error, uuid) {
+      call(msg.number, msg.message, function(error, conv_uuid) {
         if (error) {
           respondError(ws, req, "error calling number", error);
         } else {
-          users[uuid] = [ws, req];
+          users[conv_uuid] = ws;
         }
       })
     }
@@ -192,8 +189,8 @@ app.post(EVENT_PATH_RECORDING, function(req, res) {
                           languageCode: getparams.langCode,
                           user: getparams.from
                           }
-          connection = users[params.conversation_uuid];
-          speechToText(params.conversation_uuid, connection);
+          console.log(params.conversation_uuid);
+          speechToText(params.conversation_uuid);
 
       }
     });
@@ -201,7 +198,7 @@ app.post(EVENT_PATH_RECORDING, function(req, res) {
     res.end();
 });
 
-async function speechToText(con_uuid, connections) {
+async function speechToText(con_uuid) {
   const fileName = "files/"+con_uuid+".wav";
 
   // Reads a local audio file and converts it to base64
@@ -230,9 +227,22 @@ async function speechToText(con_uuid, connections) {
   console.log(`Transcription: ${transcription}`);
 
 
-  let response = "call";
-  let message = transcription;
-  respond(connection[0], connection[1], {response, message});
+  let ws = users[con_uuid];
+  //let response = "call";
+  //let message = transcription;
+  //console.log(JSON.stringify(connection));
+  // console.log("WS:" + JSON.stringify(ws));
+  // console.log("REQ: " + JSON.stringify(req));
+
+    var msgString = {'request':'call', 'message':transcription};
+    var sendVar = JSON.stringify(msgString);
+    console.log(sendVar)
+      ws.send(sendVar);
+    console.log("WS AUDIO <- " + ' ' +
+      (msgString.length > lenLog ? msgString.slice(0, lenLog) + '...' : msgString)
+    );
+
+  //respond(user[0], user[1], {'response':'call', 'message':transcription});
 
   //  respondError(connection[0], connection[1], "Error parsing audio", error);
   //return transcript;
