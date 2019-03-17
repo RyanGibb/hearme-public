@@ -133,13 +133,7 @@ function call(to_number, message, callback) {
   nexmo.calls.create({
       to: [{type: 'phone', number: to_number}],
       from: {type: 'phone', number: FROM_NUMBER},
-      //answer_url: [domain + ANSWER_PATH],
       ncco: [
-        // {
-        //   'action': 'talk',
-        //   'text': message
-        // },
-        //
         {
           "action" : "record",
           "format" : "wav",
@@ -204,7 +198,6 @@ app.post(EVENT_PATH_RECORDING, function(req, res) {
     res.writeHead(204);
     res.end();
 });
-
 
 //----------------------------------------------------------------------------
 //                            Test
