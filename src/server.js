@@ -30,7 +30,6 @@ const wsServer = new ws.Server({server: httpServer});
 var users = {};
 
 wsServer.on('connection', function(ws, req) {
-
   //respond(ws, req, {'response':'call', 'message':'test'});
 
   ws.on('close', function(code, req) {
@@ -187,7 +186,9 @@ app.post(EVENT_PATH_RECORDING, function(req, res) {
                           user: getparams.from
                           }
           console.log(params.conversation_uuid);
-          speechToText(params.conversation_uuid);
+          speechToText(params.conversation_uuid).catch(function(error) {
+            console.log("speechToText error: " + error);
+          });
 
       }
     });
@@ -196,37 +197,45 @@ app.post(EVENT_PATH_RECORDING, function(req, res) {
 });
 
 async function speechToText(con_uuid) {
-  const fileName = "files/"+con_uuid+".wav";
+  try {
+    const fileName = "files/"+con_uuid+".wav";
 
-  // Reads a local audio file and converts it to base64
-  const file = fs.readFileSync(fileName);
-  const audioBytes = file.toString('base64');
+    // Reads a local audio file and converts it to base64
+    const file = fs.readFileSync(fileName);
+    const audioBytes = file.toString('base64');
 
-  // The audio file's encoding, sample rate in hertz, and BCP-47 language code
-  const audio = {
-    content: audioBytes,
-  };
-  const config = {
-    encoding: 'LINEAR16',
-    sampleRateHertz: 16000,
-    languageCode: 'en-UK',
-  };
-  const request = {
-    audio: audio,
-    config: config,
-  };
+    // The audio file's encoding, sample rate in hertz, and BCP-47 language code
+    const audio = {
+      content: audioBytes,
+    };
+    const config = {
+      encoding: 'LINEAR16',
+      sampleRateHertz: 16000,
+      languageCode: 'en-UK',
+    };
+    const request = {
+      audio: audio,
+      config: config,
+    };
 
-  // Detects speech in the audio file
-  const [responseSPEECH] = await speech.recognize(request);
-  const transcription = responseSPEECH.results
-    .map(result => result.alternatives[0].transcript)
-    .join('\n');
-  console.log(`Transcription: ${transcription}`);
+    // Detects speech in the audio file
+    const [responseSPEECH] = await speech.recognize(request);
+    const transcription = responseSPEECH.results
+      .map(result => result.alternatives[0].transcript)
+      .join('\n');
+    console.log(`Transcription: ${transcription}`);
 
-  let response = 'call';
-  let message = transcription;
-  user = users[con_uuid];
-  respond(user[0], user[1], { response, message });
+    let response = 'call';
+    let message = transcription;
+    user = users[con_uuid];
+    respond(user[0], user[1], { response, message });
+  }
+  catch (error) {
+    user = users[con_uuid];
+    respondError(user[0], user[1], "Error parsing audio.", error);
+  }
+
+
 
 }
 
