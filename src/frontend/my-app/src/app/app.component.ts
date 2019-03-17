@@ -26,24 +26,16 @@ export class OutputForm {
     let messageString = m.data;
     console.log("<- rx " + messageString);
     let message = JSON.parse(messageString);
-    document.getElementById("OutputArea").innerHTML += message
+    if(message.response === "call") {
+      console.log("Call")
+      document.getElementById("OutputArea").innerHTML += message.message
+    } else if (message.response === "error") {
+      console.log(message.human_readable_error);
+      console.log(message.error);
     }
+    
   }
 
-}
-
-@Component({
-  selector: 'app-click-me',
-  template: `
-    <button (click)="onClickMe()">Click me!</button>
-    {{clickMessage}}`
-})
-
-export class ClickMeComponent {
-  clickMessage = '';
-
-  onClickMe() {
-    this.clickMessage = 'You are my hero!';
   }
 }
 

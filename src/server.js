@@ -28,7 +28,11 @@ const wsServer = new ws.Server({server: httpServer});
 
 wsServer.on('connection', function(ws, req) {
   wsLog('WS connection ', req, '');
-  ws.send(JSON.stringify("Hello"));;
+  // let jsonSent = {
+  //   'response':'call',
+  //    'message': 'leet'
+  //   }
+  // ws.send(JSON.stringify(jsonSent));;
 
   ws.on('close', function(code, req) {
     console.log('WS disconnection ' + ws._socket.remoteAddress + ':'
@@ -226,7 +230,7 @@ async function speechToText() {
   const transcription = response.results
     .map(result => result.alternatives[0].transcript)
     .join('\n');
-  return ${transcription};
+  return {transcription};
 }
 //
 // var WebSocketServer = require('websocket').server;
