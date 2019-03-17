@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "body{\n  background-color: #ffffff;\n}\n\nh1{\n  text-align: center;\n  font-family: Calibri, Candara, Segoe, \"Segoe UI\", Optima, Arial, sans-serif;\n  font-size: 30px;\n}\n\nh2{\n  text-align: center;\n  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;\n  font-size: 13px;\n  letter-spacing: 2px;\n}\n\np{\n  text-align: center;\n}\n\nhtml{\n  font-family: Calibri, Candara, Segoe, \"Segoe UI\", Optima, Arial, sans-serif;\n}\n\nul{\n  margin: 0px;\n  padding: 0px;\n  overflow: hidden;\n  list-style-type: none;\n}\n\nli{\n  float: right;\n}\n\nli a{\n  text-decoration: none;\n  display: block;\n  color: white;\n  background-color: #4AAD52;\n  text-align: center;\n  padding: 5px 12px; /* height padding width padding*/\n  border-radius: 10%;\n  margin: 10px;\n}\n\nli a:hover{\n  background-color: white;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYXBwLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSx5QkFBeUI7QUFDM0I7O0FBRUE7RUFDRSxrQkFBa0I7RUFDbEIsMkVBQTJFO0VBQzNFLGVBQWU7QUFDakI7O0FBRUE7RUFDRSxrQkFBa0I7RUFDbEIscUdBQXFHO0VBQ3JHLGVBQWU7RUFDZixtQkFBbUI7QUFDckI7O0FBRUE7RUFDRSxrQkFBa0I7QUFDcEI7O0FBRUE7RUFDRSwyRUFBMkU7QUFDN0U7O0FBRUE7RUFDRSxXQUFXO0VBQ1gsWUFBWTtFQUNaLGdCQUFnQjtFQUNoQixxQkFBcUI7QUFDdkI7O0FBRUE7RUFDRSxZQUFZO0FBQ2Q7O0FBRUE7RUFDRSxxQkFBcUI7RUFDckIsY0FBYztFQUNkLFlBQVk7RUFDWix5QkFBeUI7RUFDekIsa0JBQWtCO0VBQ2xCLGlCQUFpQixFQUFFLGdDQUFnQztFQUNuRCxrQkFBa0I7RUFDbEIsWUFBWTtBQUNkOztBQUVBO0VBQ0UsdUJBQXVCO0FBQ3pCIiwiZmlsZSI6InNyYy9hcHAvYXBwLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJib2R5e1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZmZmZmZmO1xufVxuXG5oMXtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICBmb250LWZhbWlseTogQ2FsaWJyaSwgQ2FuZGFyYSwgU2Vnb2UsIFwiU2Vnb2UgVUlcIiwgT3B0aW1hLCBBcmlhbCwgc2Fucy1zZXJpZjtcbiAgZm9udC1zaXplOiAzMHB4O1xufVxuXG5oMntcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICBmb250LWZhbWlseTogJ1RyZWJ1Y2hldCBNUycsICdMdWNpZGEgU2FucyBVbmljb2RlJywgJ0x1Y2lkYSBHcmFuZGUnLCAnTHVjaWRhIFNhbnMnLCBBcmlhbCwgc2Fucy1zZXJpZjtcbiAgZm9udC1zaXplOiAxM3B4O1xuICBsZXR0ZXItc3BhY2luZzogMnB4O1xufVxuXG5we1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG59XG5cbmh0bWx7XG4gIGZvbnQtZmFtaWx5OiBDYWxpYnJpLCBDYW5kYXJhLCBTZWdvZSwgXCJTZWdvZSBVSVwiLCBPcHRpbWEsIEFyaWFsLCBzYW5zLXNlcmlmO1xufVxuXG51bHtcbiAgbWFyZ2luOiAwcHg7XG4gIHBhZGRpbmc6IDBweDtcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgbGlzdC1zdHlsZS10eXBlOiBub25lO1xufVxuXG5saXtcbiAgZmxvYXQ6IHJpZ2h0O1xufVxuXG5saSBhe1xuICB0ZXh0LWRlY29yYXRpb246IG5vbmU7XG4gIGRpc3BsYXk6IGJsb2NrO1xuICBjb2xvcjogd2hpdGU7XG4gIGJhY2tncm91bmQtY29sb3I6ICM0QUFENTI7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgcGFkZGluZzogNXB4IDEycHg7IC8qIGhlaWdodCBwYWRkaW5nIHdpZHRoIHBhZGRpbmcqL1xuICBib3JkZXItcmFkaXVzOiAxMCU7XG4gIG1hcmdpbjogMTBweDtcbn1cblxubGkgYTpob3ZlcntcbiAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG59XG4iXX0= */"
+module.exports = "body{\n  background-color: #ffffff;\n}\n\nh1{\n  text-align: center;\n  font-family: Calibri, Candara, Segoe, \"Segoe UI\", Optima, Arial, sans-serif;\n  font-size: 30px;\n}\n\nh2{\n  text-align: center;\n  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;\n  font-size: 13px;\n  letter-spacing: 2px;\n}\n\nh3{\n  font-family: Calibri, Candara, Segoe, \"Segoe UI\", Optima, Arial, sans-serif;\n  float: left;\n  text-decoration: none;\n  display: block;\n  color: black;\n  text-align: center;\n  padding: 5px 12px; /* height padding width padding*/\n  border-radius: 10%;\n  margin: 5px;\n  margin-left: 60px;\n}\n\np{\n  text-align: center;\n  font-size: 40px;\n}\n\nhtml{\n  font-family: Calibri, Candara, Segoe, \"Segoe UI\", Optima, Arial, sans-serif;\n}\n\nul{\n  margin: 0px;\n  padding: 0px;\n  overflow: hidden;\n  list-style-type: none;\n  margin-right: 60px\n}\n\nli{\n  float: right;\n}\n\na{\n  text-decoration: none;\n}\n\nli a{\n  text-decoration: none;\n  display: block;\n  color: white;\n  background-color: #4AAD52;\n  text-align: center;\n  padding: 5px 12px; /* height padding width padding*/\n  border-radius: 10%;\n  margin: 5px;\n}\n\nli a:hover{\n  background-color: #63d86d;\n}\n\n#test{\n  background-color: #efefef;\n  width: 90%;\n  margin: 0 auto;\n  height: 5px;\n  opacity: 0.5;\n  margin-top: 8px;\n}\n\n/* #Logo{\n  height:400px;\n  width:200px;\n} */\n\n#help{\n  font-size: 40px;\n}\n\nimg {\n  height: 20%;\n  width: 20%;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYXBwLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSx5QkFBeUI7QUFDM0I7O0FBRUE7RUFDRSxrQkFBa0I7RUFDbEIsMkVBQTJFO0VBQzNFLGVBQWU7QUFDakI7O0FBRUE7RUFDRSxrQkFBa0I7RUFDbEIscUdBQXFHO0VBQ3JHLGVBQWU7RUFDZixtQkFBbUI7QUFDckI7O0FBRUE7RUFDRSwyRUFBMkU7RUFDM0UsV0FBVztFQUNYLHFCQUFxQjtFQUNyQixjQUFjO0VBQ2QsWUFBWTtFQUNaLGtCQUFrQjtFQUNsQixpQkFBaUIsRUFBRSxnQ0FBZ0M7RUFDbkQsa0JBQWtCO0VBQ2xCLFdBQVc7RUFDWCxpQkFBaUI7QUFDbkI7O0FBRUE7RUFDRSxrQkFBa0I7RUFDbEIsZUFBZTtBQUNqQjs7QUFFQTtFQUNFLDJFQUEyRTtBQUM3RTs7QUFFQTtFQUNFLFdBQVc7RUFDWCxZQUFZO0VBQ1osZ0JBQWdCO0VBQ2hCLHFCQUFxQjtFQUNyQjtBQUNGOztBQUVBO0VBQ0UsWUFBWTtBQUNkOztBQUVBO0VBQ0UscUJBQXFCO0FBQ3ZCOztBQUVBO0VBQ0UscUJBQXFCO0VBQ3JCLGNBQWM7RUFDZCxZQUFZO0VBQ1oseUJBQXlCO0VBQ3pCLGtCQUFrQjtFQUNsQixpQkFBaUIsRUFBRSxnQ0FBZ0M7RUFDbkQsa0JBQWtCO0VBQ2xCLFdBQVc7QUFDYjs7QUFFQTtFQUNFLHlCQUF5QjtBQUMzQjs7QUFHQTtFQUNFLHlCQUF5QjtFQUN6QixVQUFVO0VBQ1YsY0FBYztFQUNkLFdBQVc7RUFDWCxZQUFZO0VBQ1osZUFBZTtBQUNqQjs7QUFFQTs7O0dBR0c7O0FBRUg7RUFDRSxlQUFlO0FBQ2pCOztBQUVBO0VBQ0UsV0FBVztFQUNYLFVBQVU7QUFDWiIsImZpbGUiOiJzcmMvYXBwL2FwcC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiYm9keXtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2ZmZmZmZjtcbn1cblxuaDF7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgZm9udC1mYW1pbHk6IENhbGlicmksIENhbmRhcmEsIFNlZ29lLCBcIlNlZ29lIFVJXCIsIE9wdGltYSwgQXJpYWwsIHNhbnMtc2VyaWY7XG4gIGZvbnQtc2l6ZTogMzBweDtcbn1cblxuaDJ7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgZm9udC1mYW1pbHk6ICdUcmVidWNoZXQgTVMnLCAnTHVjaWRhIFNhbnMgVW5pY29kZScsICdMdWNpZGEgR3JhbmRlJywgJ0x1Y2lkYSBTYW5zJywgQXJpYWwsIHNhbnMtc2VyaWY7XG4gIGZvbnQtc2l6ZTogMTNweDtcbiAgbGV0dGVyLXNwYWNpbmc6IDJweDtcbn1cblxuaDN7XG4gIGZvbnQtZmFtaWx5OiBDYWxpYnJpLCBDYW5kYXJhLCBTZWdvZSwgXCJTZWdvZSBVSVwiLCBPcHRpbWEsIEFyaWFsLCBzYW5zLXNlcmlmO1xuICBmbG9hdDogbGVmdDtcbiAgdGV4dC1kZWNvcmF0aW9uOiBub25lO1xuICBkaXNwbGF5OiBibG9jaztcbiAgY29sb3I6IGJsYWNrO1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gIHBhZGRpbmc6IDVweCAxMnB4OyAvKiBoZWlnaHQgcGFkZGluZyB3aWR0aCBwYWRkaW5nKi9cbiAgYm9yZGVyLXJhZGl1czogMTAlO1xuICBtYXJnaW46IDVweDtcbiAgbWFyZ2luLWxlZnQ6IDYwcHg7XG59XG5cbnB7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgZm9udC1zaXplOiA0MHB4O1xufVxuXG5odG1se1xuICBmb250LWZhbWlseTogQ2FsaWJyaSwgQ2FuZGFyYSwgU2Vnb2UsIFwiU2Vnb2UgVUlcIiwgT3B0aW1hLCBBcmlhbCwgc2Fucy1zZXJpZjtcbn1cblxudWx7XG4gIG1hcmdpbjogMHB4O1xuICBwYWRkaW5nOiAwcHg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGxpc3Qtc3R5bGUtdHlwZTogbm9uZTtcbiAgbWFyZ2luLXJpZ2h0OiA2MHB4XG59XG5cbmxpe1xuICBmbG9hdDogcmlnaHQ7XG59XG5cbmF7XG4gIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcbn1cblxubGkgYXtcbiAgdGV4dC1kZWNvcmF0aW9uOiBub25lO1xuICBkaXNwbGF5OiBibG9jaztcbiAgY29sb3I6IHdoaXRlO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjNEFBRDUyO1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gIHBhZGRpbmc6IDVweCAxMnB4OyAvKiBoZWlnaHQgcGFkZGluZyB3aWR0aCBwYWRkaW5nKi9cbiAgYm9yZGVyLXJhZGl1czogMTAlO1xuICBtYXJnaW46IDVweDtcbn1cblxubGkgYTpob3ZlcntcbiAgYmFja2dyb3VuZC1jb2xvcjogIzYzZDg2ZDtcbn1cblxuXG4jdGVzdHtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2VmZWZlZjtcbiAgd2lkdGg6IDkwJTtcbiAgbWFyZ2luOiAwIGF1dG87XG4gIGhlaWdodDogNXB4O1xuICBvcGFjaXR5OiAwLjU7XG4gIG1hcmdpbi10b3A6IDhweDtcbn1cblxuLyogI0xvZ297XG4gIGhlaWdodDo0MDBweDtcbiAgd2lkdGg6MjAwcHg7XG59ICovXG5cbiNoZWxwe1xuICBmb250LXNpemU6IDQwcHg7XG59XG5cbmltZyB7XG4gIGhlaWdodDogMjAlO1xuICB3aWR0aDogMjAlO1xufVxuIl19 */"
 
 /***/ }),
 
@@ -41,7 +41,7 @@ module.exports = "body{\n  background-color: #ffffff;\n}\n\nh1{\n  text-align: c
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<ul>\n  <li><a href=\"default.asp\">Home</a></li>\n  <li><a href=\"about.asp\">About</a></li>\n</ul>\n<div style=\"text-align:center\">\n    <img width=\"300\" alt=\"Angular Logo\" src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==\">\n  <h1>\n    Welcome to {{ title }}\n  </h1>\n  <h2>A voice for those who need it</h2>\n</div>\n"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<h3>Hear Me</h3>\n<ul>\n  <a id=\"link\" href=\"default.asp\"><li>Home</li></a>\n  <a id=\"link\" href=\"../about.html\"><li>About</li></a>\n</ul>\n\n<div id=\"test\"></div>\n\n<div style=\"text-align:center\">\n    <img src=\"https://media.istockphoto.com/vectors/listen-symbol-isolated-on-white-background-vector-id686747560?k=6&m=686747560&s=612x612&w=0&h=NnxHerPgqfdeRBsVQ7alkiart1aU8AQYNo-p2vj3jOg=\" alt=\"Logo\">\n  <h1>\n    Welcome to {{ title }}\n  </h1>\n  <h2>A voice for those who need it</h2>\n</div>\n"
 
 /***/ }),
 
@@ -77,30 +77,32 @@ var AppComponent = /** @class */ (function () {
     return AppComponent;
 }());
 
-// @Component({
-//   selector: 'app-input-form',
-//   template: `
-//     <form onsubmit = sendMessage(Submit)>
-//     Enter what you'd like to say in the phone call.<br>
-//     <input type="text" name="UserInput"><br>
-//     <input type="submit" value="Submit">
-//     </form>`
-// })
-// export class InputForm {
-//   sendMessage(message) {
-//     let messageString = JSON.stringify(message);
-//     console.log("Message string: " + messageString)
-//     console.log("-> tx " + message);
-//     ws.send(JSON.stringify(message));
-//   }
-// }
 var OutputForm = /** @class */ (function () {
     function OutputForm() {
     }
+    // ws.onmessage () => function(m) {
+    //   let messageString = m.data;
+    //   console.log("<- rx " + messageString);
+    //   let message = JSON.parse(messageString);1
+    //   handleMessage(message);
+    // }
+    OutputForm.prototype.ngOnInit = function () {
+        console.log("Running");
+        // const subscription = interval(1000);
+        // subscription.subscribe(() => {
+        ws.onmessage = function (m) {
+            console.log("recvv");
+            var messageString = m.data;
+            console.log("<- rx " + messageString);
+            var message = JSON.parse(messageString);
+            // handleMessage(message);});
+        };
+        // });
+    };
     OutputForm = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-output-form',
-            template: "\n    <form>\n    Caller's response:<br>\n    <input type=\"text\" name=\"CallerResponse\"><br>"
+            template: "\n  <label for=\"OutputArea\">Caller Response</label>\n  <textarea class=\"form-control\" id=\"OutputArea\" rows=\"6\"></textarea>"
         })
     ], OutputForm);
     return OutputForm;
@@ -217,7 +219,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "{{diagnostic}}\n<form (ngSubmit)=\"onSubmit(model)\" #inputForm=\"ngForm\">\n  <div class=\"form-group\">\n    <label for=\"number\">Phone Number</label>\n    <input type=\"text\" class=\"form-control\" id=\"number\"\n          required\n          [(ngModel)]=\"model.number\" name=\"number\">\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"message\">Message</label>\n    <input type=\"text\"  class=\"form-control\" id=\"message\"\n          [(ngModel)]=\"model.message\" name=\"message\">\n  </div>\n  <button type=\"submit\" class=\"btn btn-success\" [disabled]=\"!inputForm.form.valid\">Submit</button>\n</form>"
+module.exports = "{{diagnostic}}\n<form (ngSubmit)=\"onSubmit(model)\" #inputForm=\"ngForm\">\n  <div class=\"form-group\">\n    <label for=\"number\">Phone Number</label>\n    <input type=\"text\" class=\"form-control\" id=\"number\"\n          required\n          [(ngModel)]=\"model.number\" name=\"number\">\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"message\">Message</label>\n    <textarea type=\"text\"  class=\"form-control\" id=\"message\"\n          [(ngModel)]=\"model.message\" name=\"message\" rows=\"2\"></textarea>\n  </div>\n  <button type=\"submit\" class=\"btn btn-success\" [disabled]=\"!inputForm.form.valid\">Submit</button>\n</form>"
 
 /***/ }),
 
@@ -238,16 +240,31 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var wsUrl = "ws://" + location.hostname + ":" + location.port;
-var ws = new WebSocket(wsUrl);
+var wss = new WebSocket(wsUrl);
 var InputFormComponent = /** @class */ (function () {
     function InputFormComponent() {
         this.model = new _connection_data__WEBPACK_IMPORTED_MODULE_2__["ConnectionData"]('call', '', '');
         this.submitted = false;
+        this.enabled = 'true';
     }
     InputFormComponent.prototype.onSubmit = function (messageString) {
-        this.submitted = true;
-        console.log("-> tx " + JSON.stringify(messageString));
-        ws.send(JSON.stringify(messageString));
+        if (!this.submitted) {
+            this.submitted = true;
+            console.log("-> tx " + JSON.stringify(messageString));
+            wss.send(JSON.stringify(messageString));
+        }
+        else {
+            console.log("-> tx " + JSON.stringify(messageString));
+            wss.send(JSON.stringify(messageString));
+        }
+    };
+    InputFormComponent.prototype.isValid = function () {
+        if (this.submitted) {
+            this.enabled = 'disabled';
+        }
+        else {
+            this.enabled = 'enabled';
+        }
     };
     Object.defineProperty(InputFormComponent.prototype, "diagnostic", {
         get: function () { return JSON.stringify(this.model); },
