@@ -226,6 +226,8 @@ async function speechToText(con_uuid) {
     .join('\n');
   console.log(`Transcription: ${transcription}`);
 
+  let response = 'call';
+  let message = transcription;
   user = users[con_uuid];
   respond(user[0], user[1], { response, message });
 
