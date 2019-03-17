@@ -24,13 +24,8 @@ h3{
   text-align: center;
   padding: 5px 12px; /* height padding width padding*/
   border-radius: 10%;
-  margin: 5px;
+  margin: 0px;
   margin-left: 60px;
-}
-
-p{
-  text-align: center;
-  font-size: 40px;
 }
 
 html{
@@ -47,10 +42,6 @@ ul{
 
 li{
   float: right;
-}
-
-a{
-  text-decoration: none;
 }
 
 li a{
@@ -78,13 +69,13 @@ li a:hover{
   margin-top: 8px;
 }
 
-/* #Logo{
-  height:400px;
-  width:200px;
-} */
-
 #help{
   font-size: 40px;
+}
+
+#imdiv{
+  margin-top: 10px;
+  text-align: center;
 }
 
 img {
