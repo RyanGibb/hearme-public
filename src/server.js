@@ -126,22 +126,19 @@ function call(to_number, message, callback) {
       to: [{type: 'phone', number: to_number}],
       from: {type: 'phone', number: FROM_NUMBER},
       ncco: [
+
         {
-          "action" : "talk",
-          "text" : "You have recieved a message from a hearing impaired person. "+message+" Please leave a reply after the beep and end your message with the hash key."
-        },
-        {
-          "action" : "input",
-          "timeOut" : 10,
           "action" : "record",
-          "endOnKey" : '#',
-          "beepStart" : 'true',
           "format" : "wav",
           "eventUrl": [domain + EVENT_PATH_RECORDING]
         },
         {
           "action" : "talk",
-          "text" : "Thank you for your reply."
+          "text" : message
+        },
+        {
+          "action" : "input",
+          "timeOut" : 10
         }
       ]
     },
