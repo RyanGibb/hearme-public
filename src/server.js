@@ -93,7 +93,7 @@ function wsLog(prefix, req, msg) {
 //                             Nexmo
 //----------------------------------------------------------------------------
 
-const domain = 'http://17ee8339.ngrok.io';
+const domain = 'http://22571b99.ngrok.io';
 
 const Nexmo = require('nexmo');
 
@@ -233,8 +233,20 @@ async function speechToText(con_uuid, connections) {
   let response = "call";
   let message = transcription;
   respond(connection[0], connection[1], {response, message});
+
   //  respondError(connection[0], connection[1], "Error parsing audio", error);
   //return transcript;
+
+
+
+  // let ws = connection[0];
+  // let req = connection[1];
+  // let response = "call";
+  // let message = transcription;
+  // //respond(connection[0], connection[1], {response, message});
+  // let messageString = JSON.stringify(message);
+  // ws.send(messageString);
+  // wsLog('WS <- tx ', req, messageString);
 }
 
 //----------------------------------------------------------------------------
