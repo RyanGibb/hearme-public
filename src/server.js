@@ -22,12 +22,12 @@ app.use(express.static(__dirname + '/frontend/my-app/dist/my-app/'));
 //                              WebSocket Server
 //----------------------------------------------------------------------------
 
-const {createServerFrom} = require('wss');
+const {createServerFrom} = require('ws');
 
 createServerFrom(httpServer, function connectionListener (ws) {
-  wsLog('WS connection ', req, '');
+  // wsLog('WS connection ', req, '');
 
-  ws.on('close', function(code, msg) {
+  ws.on('close', function(code, req) {
     console.log('WS disconnection ' + ws._socket.remoteAddress + ':'
         + req.connection.remotePort + ' Code ' + code);
   });
