@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { interval  } from 'rxjs';
+
 let wsUrl = "ws://" + location.hostname + ":" + location.port;
 let ws = new WebSocket(wsUrl);
 
@@ -17,7 +19,17 @@ export class AppComponent {
   <label for="OutputArea">Caller Response</label>
   <textarea class="form-control" id="OutputArea" rows="6"></textarea>`
 })
+
 export class OutputForm {
+  ngOnInit() {
+    ws.onmessage = function(m) {
+    let messageString = m.data;
+    console.log("<- rx " + messageString);
+    let message = JSON.parse(messageString);
+    document.getElementById("OutputArea").innerHTML += message
+    }
+  }
+
 }
 
 @Component({
@@ -26,6 +38,7 @@ export class OutputForm {
     <button (click)="onClickMe()">Click me!</button>
     {{clickMessage}}`
 })
+
 export class ClickMeComponent {
   clickMessage = '';
 

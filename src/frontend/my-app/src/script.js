@@ -3,7 +3,7 @@
 //                              WebSocket Client
 //----------------------------------------------------------------------------
 
-let wsUrl = "wss://" + location.hostname + ":" + location.port;
+let wsUrl = "ws://" + location.hostname + ":" + location.port;
 let ws = new WebSocket(wsUrl);
 
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ConnectionData } from '../connection_data'
+import { modelGroupProvider } from '@angular/forms/src/directives/ng_model_group';
 
 let wsUrl = "ws://" + location.hostname + ":" + location.port;
 let wss = new WebSocket(wsUrl);
@@ -25,6 +26,7 @@ export class InputFormComponent implements OnInit {
       console.log("-> tx " + JSON.stringify(messageString));
       wss.send(JSON.stringify(messageString));
     }
+    this.model.clear_message();
   }
 
   isValid() {
