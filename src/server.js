@@ -216,12 +216,12 @@ function respondError(ws, req, human_readable_error, error) {
 function respond(ws, req, msg) {
   var msgString = JSON.stringify(msg);
   ws.send(msgString);
-  wsLog('WS <- tx ', req, msgString);
+  wsMsgLog('WS <- tx ', req, msgString);
 };
 
 const lenLog = 200;
 
-function wsLog(prefix, req, msg) {
+function wsMsgLog(prefix, req, msg) {
   console.log(prefix + req.connection.remoteAddress + ':' + req.connection.remotePort + ' ' +
     (msg.length > lenLog ? msg.slice(0, lenLog) + '...' : msg)
   );
