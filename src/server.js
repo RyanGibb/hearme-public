@@ -17,6 +17,7 @@ httpServer.listen(port, function () {
 // Serve static files, such as css and scripts, from the directory below.
 app.use(express.static(__dirname + '/frontend/my-app/dist/my-app/'));
 
+app.use(express.json());
 
 //----------------------------------------------------------------------------
 //                              WebSocket Server
@@ -97,7 +98,7 @@ function wsLog(prefix, req, msg) {
 //                             Nexmo
 //----------------------------------------------------------------------------
 
-const domain = 'https://sound-machine-234713.appspot.com/';
+const domain = 'http://17ee8339.ngrok.io';
 
 const Nexmo = require('nexmo');
 
@@ -134,36 +135,32 @@ function call(to_number, message, callback) {
       from: {type: 'phone', number: FROM_NUMBER},
       //answer_url: [domain + ANSWER_PATH],
       ncco: [
+        // {
+        //   'action': 'talk',
+        //   'text': message
+        // },
+        // 
         {
-          'action': 'talk',
-          'text': message
+          "action" : "record",
+          "format" : "wav",
+          "eventUrl": [domain + EVENT_PATH_RECORDING]
         },
         {
-          'action': 'conversation',
-          'name': to_number,
-          'record': 'true'
-        }
-        // {
-        //   "action" : "record",
-        //   "format" : "wav",
-        //   "eventUrl": [domain + EVENT_PATH_RECORDING]
-        // },
-        // {
-        //   "action" : "talk",
-        //   "text" : message
-        // },
-        // {
-        //    "action": "connect",
-        //    "endpoint": [
-        //        {
-        //           //"uri": "ws://sound-machine-234713.appspot.com/nexmosocket",
-        //           "uri": "ws://sound-machine-234713.appspot.com:" + (port + 1),
-        //           "type": "websocket",
-        //           "content-type": "audio/l16;rate=8000"//,
-        //           //"headers": {}
-        //        }
-        //    ]
-        //  }
+          "action" : "talk",
+          "text" : message
+        },
+        {
+           "action": "connect",
+           "endpoint": [
+               {
+                  //"uri": "ws://sound-machine-234713.appspot.com/nexmosocket",
+                  "uri": "ws://sound-machine-234713.appspot.com",
+                  "type": "websocket",
+                  "content-type": "audio/l16;rate=8000"//,
+                  //"headers": {}
+               }
+           ]
+         }
       ],
       event_url: [domain + EVENT_PATH]
     },
@@ -192,138 +189,135 @@ function hangup(uuid, callback) {
 //                             Google Speech to Text
 //----------------------------------------------------------------------------
 
-//
-// var WebSocketServer = require('websocket').server;
-// var url = require("url");
-// const fs = require('fs');
-// const Speech = require('@google-cloud/speech');
-// const speech = new Speech.SpeechClient();
-//
-// //Create a server
-// var httpServerNexmo = http.createServer(
-//   function (req, res) {
-//     // do nothing
-//     // res.writeHead(200, {'Content-Type': 'text/plain'});
-//     // res.write('Hello World!');
-//     // res.end();
-//   }
-// );
-//
-// httpServerNexmo.listen(port + 1, function () {
-//   console.log('httpServerNexmo on port: ' + (port + 1));
-// });
-//
-// var nexmows = new WebSocketServer({
-//     httpServer: httpServerNexmo,
-//     autoAcceptConnections: true,
-// });
-//
-// // Receive Recording
-// app.post(EVENT_PATH_RECORDING, function(req, res) {
-//     var parsedUrl = url.parse(req.url, true); // true to get query as object
-//     var getparams = parsedUrl.query;
-//     var params = JSON.parse(req.body);
-//     console.log(req.body)
-//     var localfile = "files/"+params['conversation_uuid']+".wav"
-//     nexmo.files.save(params['recording_url'], localfile, (err, response) => {
-//       if(response) {
-//           console.log('The audio is downloaded successfully!');
-//           var response = {text: "http://https://sound-machine-234713.appspot.com/" + localfile,
-//                           languageCode: getparams.langCode,
-//                           user: getparams.from
-//                           }
-//       }
-//     });
-//     res.writeHead(204);
-//     res.end();
-// });
-//
-// // Nexmo Websocket Handler
-// nexmows.on('connect', function(connection) {
-//     console.log((new Date()) + ' Connection accepted' + ' - Protocol Version ' + connection.webSocketVersion);
-//     // Create the stream at the start of the call
-//     var recognizeStream = new RecognizeStream(connection);
-// });
-//
-// class RecognizeStream {
-//     constructor(connection) {
-//         this.streamCreatedAt = null;
-//         this.stream = null;
-//         this.user = null
-//         this.request = {
-//           config: {
-//             encoding: 'LINEAR16',
-//             sampleRateHertz: 8000,
-//             languageCode: 'en-UK' //Default Lang, will be updated with value from websocket
-//           },
-//           interimResults: false // If you want interim results, set this to true
-//         };
-//         connection.on('message', this.processMessage.bind(this));
-//         connection.on('close', this.close.bind(this));
-//     }
-//
-//     processMessage(message){
-//         if (message.type === 'utf8') {
-//             // Log the initial Message
-//             var data = JSON.parse(message.utf8Data)
-//             this.request.config.languageCode = data.languageCode
-//             this.user = data.user
-//         }
-//         else if (message.type === 'binary') {
-//           this.getStream().write(message.binaryData);
-//         }
-//     }
-//
-//     close(){
-//         this.stream.destroy();
-//     }
-//
-//     newStreamRequired() {
-//         // No stream exists
-//         if(!this.stream) {
-//             return true;
-//         }
-//         // check time since stream was created.  If 60+ seconds ago create a new stream
-//         else {
-//             const now = new Date();
-//             const timeSinceStreamCreated = (now - this.streamCreatedAt); // returns millis since stream created
-//             return (timeSinceStreamCreated/1000) > 60;
-//         }
-//     }
-//
-//     // helper function to ensure we always get a stream object with enough time remaining to work with
-//     getStream() {
-//         if(this.newStreamRequired()) {
-//             if (this.stream){
-//                 this.stream.destroy();
-//             }
-//             this.streamCreatedAt = new Date();
-//             //console.log("Sending request as " + this.request.config.languageCode);
-//             this.stream = speech.streamingRecognize(this.request)
-//             .on('error', console.error)
-//             .on('data', this.sendTranscription.bind(this));
-//         }
-//         return this.stream;
-//     }
-//
-//     sendTranscription(data){
-//         var response = {text: data.results[0].alternatives[0].transcript,
-//                         languageCode: this.request.config.languageCode,
-//                         user: this.user
-//                         }
-//         console.log(response);
-//         //send to client haha lmao
-//     }
-// }
+var url = require("url");
+const fs = require('fs');
+const Speech = require('@google-cloud/speech');
+const speech = new Speech.SpeechClient();
+
+const httpServerNexmo = http.createServer(app);
+
+httpServerNexmo.listen(port, function () {
+  console.log('httpServerNexmo on port: ' + port);
+});
+
+var nexmows = new ws.Server({server: httpServerNexmo});
+
+wsServer.on('connection', function(ws, req) {
+  wsLog('WS connection ', req, '');
+
+  // ws.on('close', function(code, req) {
+  }
+);
+
+// Receive Recording
+app.post(EVENT_PATH_RECORDING, function(req, res) {
+    var parsedUrl = url.parse(req.url, true); // true to get query as object
+    var getparams = parsedUrl.query;
+    console.log(req.body);
+    var params = req.body;
+    var localfile = "files/"+params['conversation_uuid']+".wav"
+    nexmo.files.save(params['recording_url'], localfile, (err, response) => {
+      if (err) {
+          console.log('Audio saving error: ' + err);
+      }
+      else {
+          console.log('The audio is downloaded successfully!');
+          var response = {text: "http://https://sound-machine-234713.appspot.com/" + localfile,
+                          languageCode: getparams.langCode,
+                          user: getparams.from
+                          }
+      }
+    });
+    res.writeHead(204);
+    res.end();
+});
+
+// Nexmo Websocket Handler
+nexmows.on('connect', function(connection) {
+    console.log((new Date()) + ' Connection accepted' + ' - Protocol Version ' + connection.webSocketVersion);
+    // Create the stream at the start of the call
+    var recognizeStream = new RecognizeStream(connection);
+});
+
+class RecognizeStream {
+    constructor(connection) {
+        this.streamCreatedAt = null;
+        this.stream = null;
+        this.user = null
+        this.request = {
+          config: {
+            encoding: 'LINEAR16',
+            sampleRateHertz: 8000,
+            languageCode: 'en-UK' //Default Lang, will be updated with value from websocket
+          },
+          interimResults: false // If you want interim results, set this to true
+        };
+        connection.on('message', this.processMessage.bind(this));
+        connection.on('close', this.close.bind(this));
+    }
+
+    processMessage(message){
+        if (message.type === 'utf8') {
+            // Log the initial Message
+            var data = JSON.parse(message.utf8Data)
+            this.request.config.languageCode = data.languageCode
+            this.user = data.user
+        }
+        else if (message.type === 'binary') {
+          this.getStream().write(message.binaryData);
+        }
+    }
+
+    close(){
+        this.stream.destroy();
+    }
+
+    newStreamRequired() {
+        // No stream exists
+        if(!this.stream) {
+            return true;
+        }
+        // check time since stream was created.  If 60+ seconds ago create a new stream
+        else {
+            const now = new Date();
+            const timeSinceStreamCreated = (now - this.streamCreatedAt); // returns millis since stream created
+            return (timeSinceStreamCreated/1000) > 60;
+        }
+    }
+
+    // helper function to ensure we always get a stream object with enough time remaining to work with
+    getStream() {
+        if(this.newStreamRequired()) {
+            if (this.stream){
+                this.stream.destroy();
+            }
+            this.streamCreatedAt = new Date();
+            //console.log("Sending request as " + this.request.config.languageCode);
+            this.stream = speech.streamingRecognize(this.request)
+            .on('error', console.error)
+            .on('data', this.sendTranscription.bind(this));
+        }
+        return this.stream;
+    }
+
+    sendTranscription(data){
+        var response = {text: data.results[0].alternatives[0].transcript,
+                        languageCode: this.request.config.languageCode,
+                        user: this.user
+                        }
+        console.log(response);
+        //send to client haha lmao
+    }
+}
 
 //----------------------------------------------------------------------------
 //                            Test
 //----------------------------------------------------------------------------
 
-// call(ryan, "the quick brown fox jumped over the lazy dog", function(error, uuid) {
-//   if(error) {
-//     console.log("TEST ERROR CALL " + JSON.stringify(error));
-//   }
+call(ryan, "the quick brown fox jumped over the lazy dog", function(error, uuid) {
+  if(error) {
+    console.log("TEST ERROR CALL " + JSON.stringify(error));
+  }
 //   // else {
 //   //   setTimeout(function() {
 //   //     speak(uuid, "white apple",
@@ -338,4 +332,4 @@ function hangup(uuid, callback) {
 //   //     )
 //   //   }, 8000);
 //   // }
-// });
+});
