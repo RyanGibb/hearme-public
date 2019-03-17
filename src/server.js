@@ -134,36 +134,36 @@ function call(to_number, message, callback) {
       from: {type: 'phone', number: FROM_NUMBER},
       //answer_url: [domain + ANSWER_PATH],
       ncco: [
+        {
+          'action': 'talk',
+          'text': message
+        },
+        {
+          'action': 'conversation',
+          'name': to_number,
+          'record': 'true'
+        }
         // {
-        //   'action': 'talk',
-        //   'text': message
+        //   "action" : "record",
+        //   "format" : "wav",
+        //   "eventUrl": [domain + EVENT_PATH_RECORDING]
         // },
         // {
-        //   'action': 'conversation',
-        //   'name': to_number,
-        //   'record': 'true'
-        // }
-        {
-          "action" : "record",
-          "format" : "wav",
-          "eventUrl": [domain + EVENT_PATH_RECORDING]
-        },
-        {
-          "action" : "talk",
-          "text" : message
-        },
-        {
-           "action": "connect",
-           "endpoint": [
-               {
-                  //"uri": "ws://sound-machine-234713.appspot.com/nexmosocket",
-                  "uri": "ws://sound-machine-234713.appspot.com:" + (port + 1),
-                  "type": "websocket",
-                  "content-type": "audio/l16;rate=8000"//,
-                  //"headers": {}
-               }
-           ]
-         }
+        //   "action" : "talk",
+        //   "text" : message
+        // },
+        // {
+        //    "action": "connect",
+        //    "endpoint": [
+        //        {
+        //           //"uri": "ws://sound-machine-234713.appspot.com/nexmosocket",
+        //           "uri": "ws://sound-machine-234713.appspot.com:" + (port + 1),
+        //           "type": "websocket",
+        //           "content-type": "audio/l16;rate=8000"//,
+        //           //"headers": {}
+        //        }
+        //    ]
+        //  }
       ],
       event_url: [domain + EVENT_PATH]
     },
@@ -222,7 +222,7 @@ function hangup(uuid, callback) {
 //     .join('\n');
 //   console.log(`Transcription: ${transcription}`);
 // }
-// 
+//
 // var WebSocketServer = require('websocket').server;
 // var url = require("url");
 // const fs = require('fs');
