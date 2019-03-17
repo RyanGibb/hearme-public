@@ -136,13 +136,20 @@ function call(to_number, message, callback) {
       ncco: [
         {
           'action': 'talk',
-          'text': message
+          'text': "You have received a message from a hearing impaired person. "+message+ " Please leave your reply after the beep and press the hash key when finished."
         },
         {
           'action': 'conversation',
           'name': to_number,
+          'endOnKey' : '#',
+          'beepStart': 'true',
           'record': 'true'
-        }
+        },
+        {
+          'action': 'talk',
+          'text': "Thank you for your message!"
+        },
+
         // {
         //   "action" : "record",
         //   "format" : "wav",
