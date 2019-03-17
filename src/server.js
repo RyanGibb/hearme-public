@@ -99,13 +99,13 @@ function call(to_number, message, callback) {
       //answer_url: [url + ANSWER_PATH],
       ncco: [
         {
-          'action':'talk',
+          'action': 'talk',
           'text': message
         },
         {
-          "action": "input",
-          "timeOut": 10,
-          "eventUrl": [url + EVENT_PATH]
+          'action': 'conversation',
+          'name': to_number,
+          'record': 'true'
         }
       ],
       event_url: [url + EVENT_PATH]
