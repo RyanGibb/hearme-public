@@ -31,10 +31,15 @@ var users = {};
 
 wsServer.on('connection', function(ws, req) {
   wsLog('WS connection ', req, '');
+  // let jsonSent = {
+  //   'response':'call',
+  //    'message': 'leet'
+  //   }
+  // ws.send(JSON.stringify(jsonSent));;
 
   ws.on('close', function(code, req) {
     console.log('WS disconnection ' + ws._socket.remoteAddress + ':'
-        + req.connection.remotePort + ' Code ' + code);
+        + ws._socket + ' Code ' + code);
   });
 
   ws.on('message', function(data) {

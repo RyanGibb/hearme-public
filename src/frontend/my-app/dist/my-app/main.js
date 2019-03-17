@@ -49,14 +49,13 @@ module.exports = "<!--The content below is only a placeholder and can be replace
 /*!**********************************!*\
   !*** ./src/app/app.component.ts ***!
   \**********************************/
-/*! exports provided: AppComponent, OutputForm, ClickMeComponent */
+/*! exports provided: AppComponent, OutputForm */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OutputForm", function() { return OutputForm; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ClickMeComponent", function() { return ClickMeComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 
@@ -80,6 +79,21 @@ var AppComponent = /** @class */ (function () {
 var OutputForm = /** @class */ (function () {
     function OutputForm() {
     }
+    OutputForm.prototype.ngOnInit = function () {
+        ws.onmessage = function (m) {
+            var messageString = m.data;
+            console.log("<- rx " + messageString);
+            var message = JSON.parse(messageString);
+            if (message.response === "call") {
+                console.log("Call");
+                document.getElementById("OutputArea").innerHTML += message.message;
+            }
+            else if (message.response === "error") {
+                console.log(message.human_readable_error);
+                console.log(message.error);
+            }
+        };
+    };
     OutputForm = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-output-form',
@@ -87,22 +101,6 @@ var OutputForm = /** @class */ (function () {
         })
     ], OutputForm);
     return OutputForm;
-}());
-
-var ClickMeComponent = /** @class */ (function () {
-    function ClickMeComponent() {
-        this.clickMessage = '';
-    }
-    ClickMeComponent.prototype.onClickMe = function () {
-        this.clickMessage = 'You are my hero!';
-    };
-    ClickMeComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-            selector: 'app-click-me',
-            template: "\n    <button (click)=\"onClickMe()\">Click me!</button>\n    {{clickMessage}}"
-        })
-    ], ClickMeComponent);
-    return ClickMeComponent;
 }());
 
 ws.onopen = function () {
@@ -175,6 +173,14 @@ var ConnectionData = /** @class */ (function () {
         this.number = number;
         this.message = message;
     }
+    /**
+     * clear_message
+     */
+    ConnectionData.prototype.clear_message = function () {
+        this.message = "";
+    };
+    ConnectionData.prototype.conversation = function () {
+    };
     return ConnectionData;
 }());
 
@@ -200,7 +206,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "{{diagnostic}}\n<form (ngSubmit)=\"onSubmit(model)\" #inputForm=\"ngForm\">\n  <div class=\"form-group\">\n    <label for=\"number\">Phone Number</label>\n    <input type=\"text\" class=\"form-control\" id=\"number\"\n          required\n          [(ngModel)]=\"model.number\" name=\"number\">\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"message\">Message</label>\n    <textarea type=\"text\"  class=\"form-control\" id=\"message\"\n          [(ngModel)]=\"model.message\" name=\"message\" rows=\"2\"></textarea>\n  </div>\n  <button type=\"submit\" class=\"btn btn-success\" [disabled]=\"!inputForm.form.valid\">Submit</button>\n</form>"
+module.exports = "<!-- {{diagnostic}} -->\n<form (ngSubmit)=\"onSubmit(model)\" #inputForm=\"ngForm\">\n  <div class=\"form-group\">\n    <label for=\"number\">Phone Number</label>\n    <input type=\"text\" class=\"form-control\" id=\"number\"\n          required\n          [(ngModel)]=\"model.number\" name=\"number\">\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"message\">Message</label>\n    <textarea type=\"text\"  class=\"form-control\" id=\"message\"\n          [(ngModel)]=\"model.message\" name=\"message\" rows=\"2\"></textarea>\n  </div>\n  <button type=\"submit\" class=\"btn btn-success\" [disabled]=\"!inputForm.form.valid\">Submit</button>\n</form>"
 
 /***/ }),
 
@@ -238,6 +244,7 @@ var InputFormComponent = /** @class */ (function () {
             console.log("-> tx " + JSON.stringify(messageString));
             wss.send(JSON.stringify(messageString));
         }
+        this.model.clear_message();
     };
     InputFormComponent.prototype.isValid = function () {
         if (this.submitted) {
