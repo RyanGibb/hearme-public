@@ -93,7 +93,7 @@ function wsLog(prefix, req, msg) {
 //                             Nexmo
 //----------------------------------------------------------------------------
 
-const domain = 'http://22571b99.ngrok.io';
+const domain = 'http://17ee8339.ngrok.io';
 
 const Nexmo = require('nexmo');
 
@@ -130,59 +130,23 @@ function call(to_number, message, callback) {
       from: {type: 'phone', number: FROM_NUMBER},
       ncco: [
         {
-<<<<<<< HEAD
-          'action': 'talk',
-          'text': "You have received a message from a hearing impaired person. "+message+ " Please leave your reply after the beep and press the hash key when finished."
+          "action" : "talk",
+          "text" : "You have recieved a message from a hearing impaired person. "+message+" Please leave a reply after the beep and end your message with the hash key."
         },
         {
-          'action': 'conversation',
-          'name': to_number,
-          'endOnKey' : '#',
-          'beepStart': 'true',
-          'record': 'true'
-        },
-        {
-          'action': 'talk',
-          'text': "Thank you for your message!"
-        },
-
-        // {
-        //   "action" : "record",
-        //   "format" : "wav",
-        //   "eventUrl": [domain + EVENT_PATH_RECORDING]
-        // },
-        // {
-        //   "action" : "talk",
-        //   "text" : message
-        // },
-        // {
-        //    "action": "connect",
-        //    "endpoint": [
-        //        {
-        //           //"uri": "ws://sound-machine-234713.appspot.com/nexmosocket",
-        //           "uri": "ws://sound-machine-234713.appspot.com:" + (port + 1),
-        //           "type": "websocket",
-        //           "content-type": "audio/l16;rate=8000"//,
-        //           //"headers": {}
-        //        }
-        //    ]
-        //  }
-=======
+          "action" : "input",
+          "timeOut" : 10,
           "action" : "record",
+          "endOnKey" : '#',
+          "beepStart" : 'true',
           "format" : "wav",
           "eventUrl": [domain + EVENT_PATH_RECORDING]
         },
         {
           "action" : "talk",
-          "text" : message
-        },
-        {
-          "action" : "input",
-          "timeOut" : 10
+          "text" : "Thank you for your reply."
         }
->>>>>>> 895b8e7955bf5b1e0f0fc8281a22f521392af253
-      ],
-      event_url: [domain + EVENT_PATH]
+      ]
     },
     function (err, res) {
       if(err) {
@@ -272,20 +236,8 @@ async function speechToText(con_uuid, connections) {
   let response = "call";
   let message = transcription;
   respond(connection[0], connection[1], {response, message});
-
   //  respondError(connection[0], connection[1], "Error parsing audio", error);
   //return transcript;
-
-
-
-  // let ws = connection[0];
-  // let req = connection[1];
-  // let response = "call";
-  // let message = transcription;
-  // //respond(connection[0], connection[1], {response, message});
-  // let messageString = JSON.stringify(message);
-  // ws.send(messageString);
-  // wsLog('WS <- tx ', req, messageString);
 }
 
 //----------------------------------------------------------------------------
