@@ -93,10 +93,6 @@ const domain = 'http://95f51413.ngrok.io';
 
 const Nexmo = require('nexmo');
 
-const seamus = '447955753134';
-const ryan = '447751580894';
-const george = '447543507436';
-
 const FROM_NUMBER = '447418343240';
 const EVENT_PATH = '/nexmo_event';
 const EVENT_PATH_RECORDING = '/recordings';
