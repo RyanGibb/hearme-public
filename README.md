@@ -1,4 +1,4 @@
-Requires a private.key file from nexmo to work
+Requires a private.key file from nexmo and run 'export GOOGLE_APPLICATION_CREDENTIALS="[PATH]"' or place in the app.yaml file.
 
 ## What inspired us
 We were _inspired_ by APIs developed by **Nexmo**, and **J.P.Morgan**'s empowerment ideas. **HearMe** is our website, aimed at people who have hearing impairments or other conditions which make telephone conversations difficult or impossible. 
