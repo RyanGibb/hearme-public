@@ -101,9 +101,9 @@ const DEFAULT_VOICE = 'Kimberly';
 const MESSAGE_PREFIX = 'You are being called by someone with a hearing imparement.';
 
 const nexmo = new Nexmo({
-  apiKey: '***REMOVED***',
-  apiSecret: '***REMOVED***',
-  applicationId: '***REMOVED***',
+  apiKey: 'REDACTED',
+  apiSecret: 'REDACTED',
+  applicationId: 'REDACTED',
   privateKey:'private.key',
 }, {
   //debug: true
