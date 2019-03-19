@@ -1,5 +1,10 @@
 
 require('dotenv').config()
+const fs = require('fs');
+const express = require('express');
+const http = require('http');
+const ws = require('ws');
+const Nexmo = require('nexmo');
 
 const DOMAIN = 'http://afb1b15e.ngrok.io';
 
@@ -11,9 +16,6 @@ if (port == null || port == "") {
 //----------------------------------------------------------------------------
 //                              HTTP Server
 //----------------------------------------------------------------------------
-
-const express = require('express');
-const http = require('http');
 
 const app = express();
 const httpServer = http.createServer(app);
@@ -30,8 +32,6 @@ app.use(express.json());
 //----------------------------------------------------------------------------
 //                              WebSocket Server
 //----------------------------------------------------------------------------
-
-const ws = require('ws');
 
 const wsServer = new ws.Server({server: httpServer});
 
@@ -96,8 +96,6 @@ function wsLog(prefix, req, msg) {
 //                             Nexmo
 //----------------------------------------------------------------------------
 
-const Nexmo = require('nexmo');
-
 const EVENT_PATH = '/nexmo_event';
 const EVENT_PATH_RECORDING = '/recordings';
 const DEFAULT_VOICE = 'Kimberly';
@@ -161,19 +159,10 @@ function hangup(uuid, callback) {
   nexmo.calls.update(callId, { action: 'hangup' }, callback);
 }
 
-//----------------------------------------------------------------------------
-//                             Google Speech to Text
-//----------------------------------------------------------------------------
 
-var url = require("url");
-const fs = require('fs');
-const Speech = require('@google-cloud/speech');
-const speech = new Speech.SpeechClient();
 
 // Receive Recording
 app.post(EVENT_PATH_RECORDING, function(req, res) {
-    var parsedUrl = url.parse(req.url, true); // true to get query as object
-    var getparams = parsedUrl.query;
     console.log(req.body);
     var params = req.body;
     var localfile = "audio/"+params['conversation_uuid']+".wav"
@@ -183,20 +172,24 @@ app.post(EVENT_PATH_RECORDING, function(req, res) {
       }
       else {
           console.log('The audio is downloaded successfully!');
-          var response = {text: DOMAIN + '/' + localfile,
-                          languageCode: getparams.langCode,
-                          user: getparams.from
-                          }
           console.log(params.conversation_uuid);
           speechToText(params.conversation_uuid).catch(function(error) {
             console.log("speechToText error: " + error);
           });
-
       }
     });
     res.writeHead(204);
     res.end();
 });
+
+//----------------------------------------------------------------------------
+//                             Google Speech to Text
+//----------------------------------------------------------------------------
+
+
+const Speech = require('@google-cloud/speech');
+const speech = new Speech.SpeechClient();
+
 
 async function speechToText(con_uuid) {
   try {
@@ -236,9 +229,6 @@ async function speechToText(con_uuid) {
     user = users[con_uuid];
     respondError(user[0], user[1], "Error parsing audio.", error);
   }
-
-
-
 }
 
 //----------------------------------------------------------------------------
