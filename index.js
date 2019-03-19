@@ -1,4 +1,13 @@
 
+require('dotenv').config()
+
+const DOMAIN = 'http://afb1b15e.ngrok.io';
+
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 8080;
+}
+
 //----------------------------------------------------------------------------
 //                              HTTP Server
 //----------------------------------------------------------------------------
@@ -6,7 +15,6 @@
 const express = require('express');
 const http = require('http');
 
-let port = 8080;
 const app = express();
 const httpServer = http.createServer(app);
 
@@ -30,7 +38,6 @@ const wsServer = new ws.Server({server: httpServer});
 var users = {};
 
 wsServer.on('connection', function(ws, req) {
-  //respond(ws, req, {'response':'call', 'message':'test'});
 
   ws.on('close', function(code, req) {
     console.log('WS disconnection ' + ws._socket.remoteAddress + ':'
@@ -89,22 +96,20 @@ function wsLog(prefix, req, msg) {
 //                             Nexmo
 //----------------------------------------------------------------------------
 
-const domain = 'http://95f51413.ngrok.io';
-
 const Nexmo = require('nexmo');
 
-const FROM_NUMBER = '447418343240';
 const EVENT_PATH = '/nexmo_event';
 const EVENT_PATH_RECORDING = '/recordings';
 const DEFAULT_VOICE = 'Kimberly';
 
-const MESSAGE_PREFIX = 'You are being called by someone with a hearing imparement.';
+const MESSAGE_PREFIX = 'You are being called by someone with a hearing impairment   ';
+const MESSAGE_SUFFIX = 'Please leave your reply after the beep.'
 
 const nexmo = new Nexmo({
-  apiKey: 'REDACTED',
-  apiSecret: 'REDACTED',
-  applicationId: 'REDACTED',
-  privateKey:'private.key',
+  apiKey: process.env.NEXMO_API_KEY,
+  apiSecret: process.env.NEXMO_API_SECRET,
+  applicationId: process.env.NEXMO_APP_ID,
+  privateKey: process.env.NEXMO_PRIVATE_KEY,
 }, {
   //debug: true
 });
@@ -117,16 +122,17 @@ app.get(EVENT_PATH, function (req, res) {
 function call(to_number, message, callback) {
   nexmo.calls.create({
       to: [{type: 'phone', number: to_number}],
-      from: {type: 'phone', number: FROM_NUMBER},
+      from: {type: 'phone', number: process.env.NEXMO_FROM_NUMER},
       ncco: [
         {
           "action" : "talk",
-          "text" : MESSAGE_PREFIX + message
+          "text" : MESSAGE_PREFIX + message + MESSAGE_SUFFIX
         },
         {
           "action" : "record",
           "format" : "wav",
-          "eventUrl": [domain + EVENT_PATH_RECORDING]
+          "beepStart" : "true",
+          "eventUrl": [DOMAIN + EVENT_PATH_RECORDING]
         },
         {
           "action" : "input",
@@ -170,14 +176,14 @@ app.post(EVENT_PATH_RECORDING, function(req, res) {
     var getparams = parsedUrl.query;
     console.log(req.body);
     var params = req.body;
-    var localfile = "files/"+params['conversation_uuid']+".wav"
+    var localfile = "audio/"+params['conversation_uuid']+".wav"
     nexmo.files.save(params['recording_url'], localfile, (err, response) => {
       if (err) {
           console.log('Audio saving error: ' + err);
       }
       else {
           console.log('The audio is downloaded successfully!');
-          var response = {text: "http://https://sound-machine-234713.appspot.com/" + localfile,
+          var response = {text: DOMAIN + '/' + localfile,
                           languageCode: getparams.langCode,
                           user: getparams.from
                           }
@@ -194,7 +200,7 @@ app.post(EVENT_PATH_RECORDING, function(req, res) {
 
 async function speechToText(con_uuid) {
   try {
-    const fileName = "files/"+con_uuid+".wav";
+    const fileName = "audio/"+con_uuid+".wav";
 
     // Reads a local audio file and converts it to base64
     const file = fs.readFileSync(fileName);

@@ -18,11 +18,15 @@
   "homepage": "https://github.com/Shamebob/HackTheBurgh5#readme",
   "dependencies": {
     "@google-cloud/speech": "^2.3.0",
+    "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "nexmo": "^2.4.1",
     "react": "^16.8.4",
     "rxjs": "^6.4.0",
     "ws": "^6.2.0"
+  },
+  "engines": {
+    "node": "v8.10.0"
   },
   "devDependencies": {},
   "description": ""
