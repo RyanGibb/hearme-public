@@ -103,18 +103,11 @@ const DEFAULT_VOICE = 'Kimberly';
 const MESSAGE_PREFIX = 'You are being called by someone with a hearing impairment   ';
 const MESSAGE_SUFFIX = 'Please leave your reply after the beep.'
 
-console.log(JSON.stringify({
-  apiKey: process.env.NEXMO_API_KEY,
-  apiSecret: process.env.NEXMO_API_SECRET,
-  applicationId: process.env.NEXMO_APP_ID,
-  privateKey: process.env.NEXMO_PRIVATE_KEY,
-}));
-
 const nexmo = new Nexmo({
   apiKey: process.env.NEXMO_API_KEY,
   apiSecret: process.env.NEXMO_API_SECRET,
   applicationId: process.env.NEXMO_APP_ID,
-  privateKey: process.env.NEXMO_PRIVATE_KEY,
+  privateKey: process.env.NEXMO_PRIVATE_KEY
 }, {
   //debug: true
 });
